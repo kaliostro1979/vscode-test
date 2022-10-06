@@ -1,0 +1,30 @@
+.nav-link {
+
+    &.active {
+        color: green;
+    }
+}
+
+.NavBarBagIcon {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    padding: 3px;
+}
+
+.CardItemsCount {
+    position: absolute;
+    top: 20px;
+    right: -15px;
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: white;
+    font-weight: 700;
+}
