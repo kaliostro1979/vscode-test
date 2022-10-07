@@ -1,18 +1,20 @@
 import React, { useContext } from 'react'
 import { Col, Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import {addToCard} from "../redux/slices/card.slice"
-import { Context } from './../context/Context';
-import ItemCounter from './item-counter/ItemCounter';
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Context } from './../context/Context'
+import ItemCounter from './item-counter/ItemCounter'
+import { addToShoppingCart } from '../redux/slices/cartActions.slice'
+import { getMiniCartProducts } from '../redux/slices/miniCart.slice'
 
-const ProductCard = ({ id, name, price, image, qnty }) => {
+const ProductCard = ({ id, name, price, image, qnty, product }) => {
   const dispatch = useDispatch()
   const { setShow } = useContext(Context)
 
-  const handleClick = (id) => {
+  const handleClick = (product) => {
     setShow(true)
-    dispatch(addToCard(id))
+    dispatch(addToShoppingCart(product))
+    dispatch(getMiniCartProducts())
   }
 
   return (
@@ -36,7 +38,7 @@ const ProductCard = ({ id, name, price, image, qnty }) => {
             <Button
               variant="danger text-align-center"
               style={{ zIndex: 1 }}
-              onClick={() => handleClick(id)}
+              onClick={() => handleClick(product)}
             >
               Add to Card
             </Button>

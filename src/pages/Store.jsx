@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react'
 import { Row } from 'react-bootstrap'
-import items from "../data/items.json"
-import ProductCard from './../components/ProductCard';
+import ProductCard from './../components/ProductCard'
+import { useSelector, useDispatch } from 'react-redux'
+import Preloader from './../components/Preloader'
+import { getProducts } from '../redux/slices/products.slice'
 
 const Store = () => {
-    
-    return (
-        <Row md={2} xs={1} lg={3}>
-            {
-                items.products.map(product=>{
-                    return (
-                      <ProductCard
-                        {...product}
-                        product={product}
-                        key={product.id}
-                      />
-                    )
-                })
-            }
-        </Row>
-    );
-};
+  const products = useSelector((state) => state.main.shoppingCart.products)
+  const isLoading = useSelector((state) => state.main.shoppingCart.isLoading)
+  const error = useSelector((state) => state.main.shoppingCart.error)
+  const dispatch = useDispatch()
 
-export default Store;
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
+
+  return (
+    <Row md={2} xs={1} lg={3}>
+      {error ? <p>{error}</p> : null}
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        products &&
+        products.map((product) => {
+          return <ProductCard {...product} product={product} key={product.id} />
+        })
+      )}
+    </Row>
+  )
+}
+
+export default Store

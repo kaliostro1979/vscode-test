@@ -6,11 +6,9 @@ import MiniCard from '../components/MiniCard/MiniCard';
 export default function Layout({ children }) {
   return (
     <Container>
-      <div className="Layout">
-        <CustomNavBar/>
-        <MiniCard />
-        {children}
-      </div>
+      <CustomNavBar />
+      <MiniCard />
+      <div className="Layout">{children}</div>
     </Container>
   )
 }

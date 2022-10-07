@@ -1,14 +1,17 @@
 import React from 'react'
 import RemoveIcon from './../../icons/RemoveIcon'
 import { Button } from 'react-bootstrap'
-import { removeCardItem } from '../../redux/slices/card.slice'
 import { useDispatch } from 'react-redux'
+import { removeProductFromCart } from '../../redux/slices/cartActions.slice'
+import { getMiniCartProducts } from '../../redux/slices/miniCart.slice'
 
 const MiniCardItem = ({ id, name, image, price, qnty }) => {
   const dispatch = useDispatch()
+ 
 
   const handleRemoveItem = (id) => {
-    dispatch(removeCardItem(id))
+    dispatch(removeProductFromCart(id))
+    dispatch(getMiniCartProducts())
   }
 
   return (

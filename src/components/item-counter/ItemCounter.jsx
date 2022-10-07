@@ -2,19 +2,18 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import PlusIcon from './../../icons/PlusIcon';
 import MinusIcon from './../../icons/MinusIcon';
-import { useSelector, useDispatch } from 'react-redux';
-import { incrementItemCount , decrementItemCount} from '../../redux/slices/card.slice'
+import { useDispatch } from 'react-redux';
+
 
 const ItemCounter = ({ id, qnty }) => {
   const dispatch = useDispatch()
-  const product = useSelector((state) => state.main.cart.product)
-
+  
   const handleIncrementCount = (id) => {
-    dispatch(incrementItemCount(id))
+    dispatch()
   }
 
   const handleDecrementCount = (id) => {
-    dispatch(decrementItemCount(id))
+    dispatch()
   }
 
   return (

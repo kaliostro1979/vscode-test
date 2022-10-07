@@ -1,47 +1,58 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import MiniCardItem from './MiniCardItem'
 import CloseIcon from './../../icons/CloseIcon'
 import { Context } from './../../context/Context'
 import { Button } from 'react-bootstrap'
-import { removeAllItems } from '../../redux/slices/card.slice'
+import { getMiniCartProducts } from '../../redux/slices/miniCart.slice'
+import { removeAllProductsFromCart } from '../../redux/slices/cartActions.slice'
+
 
 const MiniCard = () => {
     const dispatch = useDispatch()
-    const cardItems = useSelector((state) => state.main.cart.cardItems)
+    const cardItems = useSelector(
+      (state) => state.main.miniCartProducts.addedPorducts
+    )
     const { show, setShow } = useContext(Context)
 
     const handleRemoveAllItems = () => {
-        dispatch(removeAllItems())
+        dispatch(removeAllProductsFromCart())
+        dispatch(getMiniCartProducts())
     }
 
-    return (
-        <div className={!show ? 'MiniCard Hide' : 'MiniCard'}>
-            <div className="MiniCardClose" onClick={() => setShow(false)}>
-                <CloseIcon/>
-            </div>
+    useEffect(() => {
+      dispatch(getMiniCartProducts())
+    }, [dispatch])
 
-            <div className={"MiniCardInner"}>
-                {cardItems.length ? (
-                    cardItems.map((item) => {
-                        return <MiniCardItem {...item} key={item.id * Math.random()}/>
-                    })
-                ) : (
-                    <div className="MiniCardNoItems">
-                        <p>You have not any items in your card</p>
-                    </div>
-                )}
-            </div>
-            <div className={"MiniCardFooter"}>
-                <Button
-                    className="MiniCardClearButton"
-                    variant="danger"
-                    onClick={handleRemoveAllItems}
-                >
-                    Remove All Items
-                </Button>
-            </div>
+    
+
+    return (
+      <div className={!show ? 'MiniCard Hide' : 'MiniCard'}>
+        <div className="MiniCardClose" onClick={() => setShow(false)}>
+          <CloseIcon />
         </div>
+
+        <div className={'MiniCardInner'}>
+          {cardItems && cardItems.length ? (
+            cardItems.map((item) => {
+              return <MiniCardItem {...item} key={item.id * Math.random()} />
+            })
+          ) : (
+            <div className="MiniCardNoItems">
+              <p>You have not any items in your card</p>
+            </div>
+          )}
+        </div>
+        <div className={'MiniCardFooter'}>
+          <Button
+            className="MiniCardClearButton"
+            variant="danger"
+            onClick={handleRemoveAllItems}
+          >
+            Remove All Items
+          </Button>
+        </div>
+      </div>
     )
 }
 

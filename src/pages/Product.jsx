@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSingleProduct } from '../redux/slices/products.slice';
 
 const Product = ({products}) => {
     const params = useParams()
-    const currentProduct = products && products.filter(prod=>prod.id === +params.id)[0]
+    
+    const product = useSelector((state) => state.main.shoppingCart.product)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch(getSingleProduct(params.id))
+    }, [dispatch, params])
     
     return (
       <>
         <Row>
           <Col>
-            <img src={currentProduct.image} alt={currentProduct.name} style={{height: "800px", objectFit: "cover", objectPosition: "center"}}/>
+            <img src={product.image} alt={product.name} style={{height: "800px", objectFit: "cover", objectPosition: "center"}}/>
           </Col>
         </Row>
         <Row>
-          <p>Product - {currentProduct.name}</p>
-          <p>{currentProduct.price}</p>
+          <p>Product - {product.name}</p>
+          <p>{product.price}</p>
         </Row>
       </>
     )
