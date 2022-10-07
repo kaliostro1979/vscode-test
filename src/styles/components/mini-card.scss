@@ -1,9 +1,9 @@
 .MiniCard {
     position: fixed;
-    top: 0;
+    top: 56px;
     right: 0;
     width: 400px;
-    height: 100vh;
+    height: calc(100vh - 56px);
     padding: 50px 20px 20px 20px;
     background-color: bisque;
     transition: .5s all ease;
@@ -13,7 +13,7 @@
     }
 }
 
-.MiniCardItem{
+.MiniCardItem {
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -50,7 +50,7 @@
     align-items: center;
 }
 
-.MiniCardNoItems{
+.MiniCardNoItems {
     width: 100%;
     height: 100%;
     display: flex;
@@ -74,9 +74,20 @@
     cursor: pointer;
 }
 
-.MiniCardClearButton{
+.MiniCardFooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: bisque;
+    text-align: center;
+}
+
+/*
+.MiniCardClearButton {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-}
+}*/
