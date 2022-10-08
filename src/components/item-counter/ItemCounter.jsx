@@ -1,45 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import PlusIcon from './../../icons/PlusIcon';
 import MinusIcon from './../../icons/MinusIcon';
-import { useDispatch } from 'react-redux';
 
 
-const ItemCounter = ({ id, qnty }) => {
-  const dispatch = useDispatch()
-  
-  const handleIncrementCount = (id) => {
-    dispatch()
-  }
+const ItemCounter = ({ product, setProductQuantity, productQuantity }) => {
 
-  const handleDecrementCount = (id) => {
-    dispatch()
-  }
+    const handleIncrementCount = () => {
+        setProductQuantity((prev) => prev + 1)
+    }
 
-  return (
-    <div className="ItemCounter">
-      <Button
-        variant="outline-secondary"
-        className="ItemCounterButton"
-        onClick={() => handleDecrementCount(id)}
-      >
-        <MinusIcon />
-      </Button>
-      <input
-        type="text"
-        className="ItemCounterValue"
-        disabled
-        value={qnty || '0'}
-      />
-      <Button
-        variant="outline-secondary"
-        className="ItemCounterButton"
-        onClick={() => handleIncrementCount(id)}
-      >
-        <PlusIcon />
-      </Button>
-    </div>
-  )
+    const handleDecrementCount = () => {
+        setProductQuantity((prev) => prev - 1)
+    }
+
+    return (
+        <div className="ItemCounter">
+            <Button
+                variant="outline-secondary"
+                className="ItemCounterButton"
+                onClick={() => handleDecrementCount(product)}
+                disabled={productQuantity <= 0}
+            >
+                <MinusIcon/>
+            </Button>
+            <input
+                type="text"
+                className="ItemCounterValue"
+                disabled
+                value={productQuantity}
+            />
+            <Button
+                variant="outline-secondary"
+                className="ItemCounterButton"
+                onClick={() => handleIncrementCount(product)}
+            >
+                <PlusIcon/>
+            </Button>
+        </div>
+    )
 }
 
 export default ItemCounter;

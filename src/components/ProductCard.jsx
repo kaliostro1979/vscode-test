@@ -1,19 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Col, Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Context } from './../context/Context'
 import ItemCounter from './item-counter/ItemCounter'
 import { addToShoppingCart } from '../redux/slices/cartActions.slice'
 import { getMiniCartProducts } from '../redux/slices/miniCart.slice'
+import { Context } from "../context/Context";
 
 const ProductCard = ({ id, name, price, image, qnty, product }) => {
+  const [ productQuantity, setProductQuantity ] = useState(1)
+
   const dispatch = useDispatch()
   const { setShow } = useContext(Context)
 
   const handleClick = (product) => {
     setShow(true)
-    dispatch(addToShoppingCart(product))
+    dispatch(addToShoppingCart([product, productQuantity]))
     dispatch(getMiniCartProducts())
   }
 
@@ -42,7 +44,7 @@ const ProductCard = ({ id, name, price, image, qnty, product }) => {
             >
               Add to Card
             </Button>
-            <ItemCounter id={id} qnty={qnty} />
+            <ItemCounter product={product} setProductQuantity={setProductQuantity} productQuantity={productQuantity}/>
           </div>
         </div>
       </div>
