@@ -1,9 +1,8 @@
 import { useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import Layout from './layout/Layout'
-import RoutesContainer from './routes/Routes';
-import { Context } from './context/Context';
-
+import { Context } from './context/Context'
+import RoutesContainer from './routes/Routes'
 
 function App() {
   const { setShow } = useContext(Context)
@@ -12,10 +11,12 @@ function App() {
   useEffect(() => {
     setShow(false)
   }, [navgation, setShow])
- 
+
   return (
     <div className="Main">
-      <Layout><RoutesContainer /></Layout>
+      <Layout>
+        <RoutesContainer />
+      </Layout>
     </div>
   )
 }

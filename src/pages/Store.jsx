@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Row } from 'react-bootstrap'
+import { Row, Container } from 'react-bootstrap'
 import ProductCard from './../components/ProductCard'
 import { useSelector, useDispatch } from 'react-redux'
 import Preloader from './../components/Preloader'
@@ -16,17 +16,21 @@ const Store = () => {
   }, [dispatch])
 
   return (
-    <Row md={2} xs={1} lg={3}>
-      {error ? <p>{error}</p> : null}
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        products &&
-        products.map((product) => {
-          return <ProductCard {...product} product={product} key={product.id} />
-        })
-      )}
-    </Row>
+    <Container>
+      <Row md={2} xs={1} lg={3}>
+        {error ? <p>{error}</p> : null}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          products &&
+          products.map((product) => {
+            return (
+              <ProductCard {...product} product={product} key={product.id} />
+            )
+          })
+        )}
+      </Row>
+    </Container>
   )
 }
 

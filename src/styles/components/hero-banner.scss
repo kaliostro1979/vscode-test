@@ -1,0 +1,31 @@
+.HeroBanner {
+    position: relative;
+}
+
+.HeroBannerImage {
+    position: relative;
+    width: 100%;
+    padding-top: 653px; 
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.HeroBannerTitle {
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    max-width: 573px;
+    transform: translateY(-50%);
+    font-size: 64px;
+    font-weight: 900;
+    color: #ffffff;
+    z-index: 1;
+}
