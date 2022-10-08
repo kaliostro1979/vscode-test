@@ -6,6 +6,7 @@ import { Context } from './../../context/Context'
 import { Button } from 'react-bootstrap'
 import { getMiniCartProducts } from '../../redux/slices/miniCart.slice'
 import { removeAllProductsFromCart } from '../../redux/slices/cartActions.slice'
+import { NavLink } from 'react-router-dom';
 
 
 const MiniCard = () => {
@@ -44,13 +45,22 @@ const MiniCard = () => {
           )}
         </div>
         <div className={'MiniCardFooter'}>
-          <Button
-            className="MiniCardClearButton"
-            variant="danger"
-            onClick={handleRemoveAllItems}
+          {cardItems && cardItems.length ? (
+            <Button
+              className="MiniCardClearButton"
+              variant="danger"
+              onClick={handleRemoveAllItems}
+            >
+              Remove All Items
+            </Button>
+          ) : null}
+          <NavLink
+            to={'/cart'}
+            variant={'danger'}
+            className={'btn btn-danger text-align-center mx-3'}
           >
-            Remove All Items
-          </Button>
+            Open Cart
+          </NavLink>
         </div>
       </div>
     )

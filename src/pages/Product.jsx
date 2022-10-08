@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleProduct } from '../redux/slices/products.slice';
 
-const Product = ({products}) => {
+const Product = () => {
     const params = useParams()
     
     const product = useSelector((state) => state.main.shoppingCart.product)

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Container, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
@@ -7,12 +7,22 @@ import { useSelector } from 'react-redux';
 import { Context } from "../context/Context";
 
 const CustomNavBar = () => {
-    
     const cardItems = useSelector(
       (state) => state.main.miniCartProducts.addedPorducts
     )
 
+    const [itemsCount, setItemsCount] = useState(null)
+
     const { setShow } = useContext(Context)
+
+    useEffect(() => {
+      setItemsCount(
+        cardItems &&
+        cardItems.reduce((prev, current) => {
+            return prev + current.qnty
+          }, 0)
+      )
+    }, [cardItems])
 
     return (
       <Navbar fixed={'top'} className={'bg-light'}>
@@ -35,9 +45,7 @@ const CustomNavBar = () => {
               onClick={() => setShow(true)}
             >
               <div className="NavBarBagIcon">
-                <div className="CardItemsCount">
-                  {cardItems ? cardItems.length : 0}
-                </div>
+                <div className="CardItemsCount">{itemsCount || 0}</div>
                 <ShoppingCartIcon />
               </div>
             </Button>

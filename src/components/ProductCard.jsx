@@ -15,7 +15,7 @@ const ProductCard = ({ id, name, price, image, qnty, product }) => {
 
   const handleClick = (product) => {
     setShow(true)
-    dispatch(addToShoppingCart([product, productQuantity]))
+    dispatch(addToShoppingCart([{...product, qnty: productQuantity}, productQuantity]))
     dispatch(getMiniCartProducts())
   }
 

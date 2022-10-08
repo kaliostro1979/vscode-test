@@ -11,12 +11,10 @@ import { ContextProvider } from './context/Context';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
-      <Provider store={store}>
-        <ContextProvider>
+    <Provider store={store}>
+      <ContextProvider>
         <App />
-        </ContextProvider>
-      </Provider>
-    </React.StrictMode>
+      </ContextProvider>
+    </Provider>
   </BrowserRouter>
 )

@@ -1,26 +1,21 @@
+import { useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Layout from './layout/Layout'
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home';
-import About from './pages/About';
-import Store from './pages/Store';
-import Product from './pages/Product';
-import items from './data/items.json'
+import RoutesContainer from './routes/Routes';
+import { Context } from './context/Context';
+
 
 function App() {
+  const { setShow } = useContext(Context)
+  const navgation = useNavigate()
+
+  useEffect(() => {
+    setShow(false)
+  }, [navgation, setShow])
  
   return (
-    <div className="App">
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/store" element={<Store />} />
-          <Route
-            path="/store/:id"
-            element={<Product products={items.products} />}
-          />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </Layout>
+    <div className="Main">
+      <Layout><RoutesContainer /></Layout>
     </div>
   )
 }

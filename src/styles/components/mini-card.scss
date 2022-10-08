@@ -7,10 +7,37 @@
     padding: 50px 20px 20px 20px;
     background-color: bisque;
     transition: .5s all ease;
+    z-index: 3;
 
     &.Hide {
         right: -100%;
     }
+}
+
+.MiniCardInner {
+    max-height: calc(100vh - 158px);
+    min-height: calc(100vh - 158px);
+    overflow: auto;
+   
+    /* width */
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+    
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+    
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
 }
 
 .MiniCardItem {
@@ -18,13 +45,14 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
-    padding-right: 40px;
+    padding-right: 80px;
+    background-color: #f1f1f1;
 }
 
 .MiniCardItemImage {
     position: relative;
     width: 100px;
-    height: 100px;
+    padding-top: 100px;
     margin-right: 20px;
 
     img {
@@ -38,10 +66,16 @@
     }
 }
 
+.MiniCardMeta {
+    p {
+        margin-bottom: 0;
+    }
+}
+
 .MiniCardItemRemoveIcon {
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 20px;
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
@@ -83,11 +117,3 @@
     background-color: bisque;
     text-align: center;
 }
-
-/*
-.MiniCardClearButton {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}*/

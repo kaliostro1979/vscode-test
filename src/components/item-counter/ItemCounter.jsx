@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import PlusIcon from './../../icons/PlusIcon';
 import MinusIcon from './../../icons/MinusIcon';
 
 
-const ItemCounter = ({ product, setProductQuantity, productQuantity }) => {
+const ItemCounter = ({ setProductQuantity, productQuantity }) => {
 
     const handleIncrementCount = () => {
         setProductQuantity((prev) => prev + 1)
@@ -19,8 +19,8 @@ const ItemCounter = ({ product, setProductQuantity, productQuantity }) => {
             <Button
                 variant="outline-secondary"
                 className="ItemCounterButton"
-                onClick={() => handleDecrementCount(product)}
-                disabled={productQuantity <= 0}
+                onClick={() => handleDecrementCount()}
+                disabled={productQuantity <= 1}
             >
                 <MinusIcon/>
             </Button>
@@ -33,7 +33,7 @@ const ItemCounter = ({ product, setProductQuantity, productQuantity }) => {
             <Button
                 variant="outline-secondary"
                 className="ItemCounterButton"
-                onClick={() => handleIncrementCount(product)}
+                onClick={() => handleIncrementCount()}
             >
                 <PlusIcon/>
             </Button>

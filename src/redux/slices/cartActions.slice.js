@@ -5,8 +5,9 @@ const cartAction = createSlice({
     initialState: {
         cartItems: [],
         quantity: 1,
+        localStorageItems: [],
         isLoading: false,
-        error: false,
+        error: false
     },
     reducers: {
         addToShoppingCart(state, action) {
@@ -20,17 +21,21 @@ const cartAction = createSlice({
                 cartProducts.find((product) => product.id === currentProduct.id).qnty = quantity
                 state.cartItems = cartProducts
             }
-
             window.localStorage.setItem('added_product', JSON.stringify(state.cartItems))
         },
         removeProductFromCart(state, action) {
             const cartProducts = JSON.parse(window.localStorage.getItem('added_product'))
-            window.localStorage.setItem('added_product', JSON.stringify(state.cartItems))
             state.cartItems = cartProducts.filter((product) => product.id !== action.payload)
+            window.localStorage.setItem('added_product', JSON.stringify(state.cartItems))
         },
         removeAllProductsFromCart(state) {
             state.cartItems = []
             window.localStorage.setItem('added_product', JSON.stringify(state.cartItems))
+        },
+        getProductsFromLocalStorage(state){
+            state.localStorageItems = JSON.parse(
+              window.localStorage.getItem('added_product')
+            )
         }
     },
     extraReducers: {},
@@ -38,7 +43,8 @@ const cartAction = createSlice({
 
 export default cartAction.reducer
 export const {
-    addToShoppingCart,
-    removeProductFromCart,
-    removeAllProductsFromCart
+  addToShoppingCart,
+  removeProductFromCart,
+  removeAllProductsFromCart,
+  getProductsFromLocalStorage,
 } = cartAction.actions
