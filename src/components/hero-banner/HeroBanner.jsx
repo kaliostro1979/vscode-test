@@ -2,11 +2,14 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getBannerData } from './../../redux/slices/banner.slice'
+import Sale from './../sale/Sale'
+import { useLocation } from 'react-router-dom'
 
 const HeroBanner = ({ page }) => {
   const dispatch = useDispatch()
   const bannerData = useSelector((state) => state.main.banner.bannerData)
-
+  const location = useLocation()
+  
   useEffect(() => {
     dispatch(getBannerData(page))
   }, [dispatch, page])
@@ -22,6 +25,11 @@ const HeroBanner = ({ page }) => {
       {bannerData.data ? (
         <div className="HeroBannerImage">
           <img src={bannerData.data.image} alt="" />
+        </div>
+      ) : null}
+      {location.pathname === '/' ? (
+        <div className="SaleWrapper">
+          <Sale />
         </div>
       ) : null}
     </div>

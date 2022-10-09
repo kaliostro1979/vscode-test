@@ -1,0 +1,82 @@
+.BestSellersCard {
+    border: 1px solid #F6F7F8;
+    border-radius: 4px;
+}
+
+.BestSellersCardImage {
+    position: relative;
+    padding-top: 272px;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &:hover .ShoppingPlaceholder {
+        display: flex;
+    }
+}
+
+.BestSellersCardMeta {
+    padding: 9px 0 25px;
+    text-align: center;
+}
+
+.BestSellersCardTitle {
+    margin: 9px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #223263;
+}
+
+.BestSellersCardRateStars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .BestSellersCardRateStarsItem {
+        &:not(:last-child) {
+            margin-right: 13px;
+        }
+    }
+
+    .Yellow {
+        color: #FFC600;
+    }
+
+    .Gray {
+        color: #C1C8CE;
+    }
+}
+
+.BestSellersCardPriceWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BestSellersCardPrice {
+    font-size: 18px;
+    font-weight: 700;
+    color: #40BFFF;
+}
+
+.BestSellersCardSellPrice, .BestSellersCardSale {
+    font-size: 14px;
+}
+
+.BestSellersCardSellPrice {
+    margin: 0 8px 0 13px;
+    text-decoration: line-through;
+    color: #9098B1;
+}
+
+.BestSellersCardSale {
+    font-weight: 700;
+    color: #FB7181;
+}

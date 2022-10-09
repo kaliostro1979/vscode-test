@@ -1,0 +1,27 @@
+.ShoppingPlaceholder {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.ShoppingPlaceholderList {
+    display: flex;
+}
+
+.ShoppingPlaceholderIcon {
+    padding: 15px 17px;
+    border: 2px solid #33A0FF;
+    border-radius: 50%;
+    color: #33A0FF;
+    cursor: pointer;
+
+    &:first-child {
+        margin-right: 10px;
+    }
+}
