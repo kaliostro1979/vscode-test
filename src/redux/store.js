@@ -6,6 +6,7 @@ import bannerSlice from './slices/banner.slice';
 import saleSlice from './slices/sale.slice';
 import bestSellersSlice from './slices/best_sellers.slice';
 import categoriesSlice from './slices/catyegory.slice'
+import testSlice from './slices/test.slice';
 
 const rootReducer = combineReducers({
   shoppingCart: productsSlice,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   banner: bannerSlice,
   sale: saleSlice,
   best_sellers: bestSellersSlice,
-  categories: categoriesSlice
+  categories: categoriesSlice,
+  test: testSlice
 })
 
 export const store = configureStore({

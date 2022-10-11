@@ -5,7 +5,7 @@
       "name": "Item-1",
       "image": "/images/abstract.jpg",
       "price": "520 USD",
-      "qnty": 1
+      "on_stock": 10
     },
     {
       "id": 2,
@@ -101,7 +101,7 @@
       "image": "https://images.unsplash.com/photo-1562183241-b937e95585b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80"
     }
   ],
-  "categories": ["all", "bags", "sneakers", "belt", "sunglasses"],
+  "categories": [{"name": "all"}, { "name": "bags" }, {"name":"sneakers"}, {"name":"belt"}, {"name":"sunglasses"}],
   "best_seller": [
     {
       "id": "all",

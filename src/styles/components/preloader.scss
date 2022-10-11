@@ -1,0 +1,12 @@
+.Preloader {
+    width: 100%;
+    height: calc(100vh - 87px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PreloaderIcon {
+    width: 100px;
+    color: #000000;
+}

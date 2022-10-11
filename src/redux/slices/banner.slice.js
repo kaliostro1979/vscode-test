@@ -5,7 +5,7 @@ export const getBannerData = createAsyncThunk(
   'banner/getBannerData',
   async (pageName, {rejectWithValue}) => {
     try {
-        const bannerData = await fetch(`${URL}/banner/${pageName}`).then(res=>res.json()).then(data=>data)
+        const bannerData = await fetch(`${URL}/banner?page=${pageName}`).then(res=>res.json()).then(data=>data)
         return bannerData
     } catch(error) {
         return rejectWithValue(error)

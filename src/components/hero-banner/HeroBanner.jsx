@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getBannerData } from './../../redux/slices/banner.slice'
@@ -13,6 +13,7 @@ const HeroBanner = ({ page }) => {
   useEffect(() => {
     dispatch(getBannerData(page))
   }, [dispatch, page])
+
 
   return (
     <div className="HeroBanner">
@@ -36,4 +37,4 @@ const HeroBanner = ({ page }) => {
   )
 }
 
-export default HeroBanner
+export default memo(HeroBanner)

@@ -6,6 +6,7 @@ import Product from './../pages/Product';
 import About from './../pages/About';
 import Cart from './../pages/Cart';
 import PageNotFound from './../pages/PageNotFound';
+import Test from './../components/Test';
 
 
 const RoutesContainer = () => {
@@ -16,6 +17,7 @@ const RoutesContainer = () => {
         <Route path="/store/:id" element={<Product />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path={'/test'} element={<Test />} />
         <Route path={'*'} element={<PageNotFound />} />
       </Routes>
     )

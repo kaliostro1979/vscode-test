@@ -17,7 +17,7 @@ const Categories = () => {
   const handleClick = (category)=>{
     setActiveCategory(category)
   }
-
+  
   return (
     <Row>
       <Col>
@@ -34,7 +34,7 @@ const Categories = () => {
                   }
                   onClick={() => handleClick(category)}
                 >
-                  {category}
+                  {category.name}
                 </li>
               )
             })}
