@@ -5,7 +5,7 @@ export const getBestSellersProductsByCategory = createAsyncThunk(
   'best_sellers/getBestSellersProductsByCategory',
   async (category, { rejectWithValue }) => {
     try {
-      const products = await fetch(`${URL}/best_seller/${category}`)
+      const products = await fetch(`${URL}/best-sellers?category=${category}`)
         .then((res) => res.json())
         .then((data) => data)
       return products

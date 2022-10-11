@@ -27,7 +27,7 @@ const ProductCard = ({ id, name, price, image, qnty, product }) => {
         </div>
         <div className="ProductCradMeta">
           <div className="ProductMetaInfo d-flex align-items-baseline pt-3 pb-4">
-            <Link to={`${id}`}>
+            <Link to={`/${product._id}`}>
               <div className="ProductCardTitle me-4">
                 <p className="fw-bold mb-0 fs-3">{name}</p>
               </div>

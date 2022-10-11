@@ -18,7 +18,7 @@ export const getProducts = createAsyncThunk(
 
 export const getSingleProduct = createAsyncThunk('cart/getSingleProduct', async (id, {rejectWithValue})=>{
   try {
-    const product = await fetch(`${URL}/products/${id}`)
+    const product = await fetch(`${URL}/products?id=${id}`)
       .then((res) => res.json())
       .then((data) => data)
     return product

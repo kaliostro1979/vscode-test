@@ -26,13 +26,13 @@ const Categories = () => {
             {categories.map((category) => {
               return (
                 <li
-                  key={category}
+                  key={category._id}
                   className={
-                    activeCategory === category
+                    activeCategory === category.name
                       ? 'CategoriesListItem Active'
                       : 'CategoriesListItem'
                   }
-                  onClick={() => handleClick(category)}
+                  onClick={() => handleClick(category.name)}
                 >
                   {category.name}
                 </li>

@@ -8,20 +8,17 @@ const products = require('./routes/products')
 const banner = require('./routes/banner')
 const sale = require('./routes/sale')
 const categories = require('./routes/categories')
+const bestSellers = require('./routes/best_sellers')
 
 require('dotenv').config()
 
 app.use(cors())
 
-app.get('/', (req, res, next) => {
-  res.send('Hello World!')
-})
-
-
 app.use('/products', products)
 app.use('/banner', banner)
 app.use('/sale', sale)
 app.use('/categories', categories)
+app.use('/best-sellers', bestSellers)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,

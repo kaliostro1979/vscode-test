@@ -104,7 +104,7 @@
   "categories": [{"name": "all"}, { "name": "bags" }, {"name":"sneakers"}, {"name":"belt"}, {"name":"sunglasses"}],
   "best_seller": [
     {
-      "id": "all",
+      "category": "all",
       "data": [
         {
           "id": "all-1",
@@ -253,7 +253,7 @@
       ]
     },
     {
-      "id": "bags",
+      "category": "bags",
       "data": [
         {
           "id": "bags-1",
@@ -294,7 +294,7 @@
       ]
     },
     {
-      "id": "sneakers",
+      "category": "sneakers",
       "data": [
         {
           "id": "sneakers-5",
@@ -335,7 +335,7 @@
       ]
     },
     {
-      "id": "belt",
+      "category": "belt",
       "data": [
         {
           "id": "belt-9",
@@ -376,7 +376,7 @@
       ]
     },
     {
-      "id": "sunglasses",
+      "category": "sunglasses",
       "data": [
         {
           "id": "sunglasses-13",

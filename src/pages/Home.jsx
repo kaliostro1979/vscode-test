@@ -16,7 +16,7 @@ const Home = () => {
             </Col>
           </Row>
           <Categories />
-          {/* <BestSellers /> */}
+          <BestSellers />
         </div>
       </Container>
     </div>
