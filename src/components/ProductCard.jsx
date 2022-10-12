@@ -7,7 +7,7 @@ import { addToShoppingCart } from '../redux/slices/cartActions.slice'
 import { getMiniCartProducts } from '../redux/slices/miniCart.slice'
 import { Context } from "../context/Context";
 
-const ProductCard = ({ id, name, price, image, qnty, product }) => {
+const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product }) => {
   const [ productQuantity, setProductQuantity ] = useState(1)
 
   const dispatch = useDispatch()
@@ -20,20 +20,25 @@ const ProductCard = ({ id, name, price, image, qnty, product }) => {
   }
 
   return (
-    <Col key={id}>
+    <Col key={_id}>
       <div className="ProiductCard mb-4">
         <div className="ProductCradImage">
-          <img src={image} alt={name} />
+          <img src={image} alt={title} />
         </div>
         <div className="ProductCradMeta">
           <div className="ProductMetaInfo d-flex align-items-baseline pt-3 pb-4">
-            <Link to={`/${product._id}`}>
+            <Link
+              to={{
+                pathname: `/store/${product._id}`,
+                search: `?product=${product._id}`,
+              }}
+            >
               <div className="ProductCardTitle me-4">
-                <p className="fw-bold mb-0 fs-3">{name}</p>
+                <p className="fw-bold mb-0 fs-3">{title}</p>
               </div>
             </Link>
             <div className="ProductCardPrice">
-              <p className="fw-bold mb-0">{price}</p>
+              <p className="fw-bold mb-0">${price}</p>
             </div>
           </div>
           <div className="ProductCardButton">
@@ -44,7 +49,11 @@ const ProductCard = ({ id, name, price, image, qnty, product }) => {
             >
               Add to Card
             </Button>
-            <ItemCounter product={product} setProductQuantity={setProductQuantity} productQuantity={productQuantity}/>
+            <ItemCounter
+              product={product}
+              setProductQuantity={setProductQuantity}
+              productQuantity={productQuantity}
+            />
           </div>
         </div>
       </div>

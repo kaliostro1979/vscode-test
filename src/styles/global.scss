@@ -10,3 +10,11 @@ ul {
 img {
     width: 100%;
 }
+
+.Main {
+    padding-top: 55px;
+
+    &.Admin {
+        padding-top: 0;
+    }
+}

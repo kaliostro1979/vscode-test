@@ -7,6 +7,7 @@ import saleSlice from './slices/sale.slice';
 import bestSellersSlice from './slices/best_sellers.slice';
 import categoriesSlice from './slices/catyegory.slice'
 import testSlice from './slices/test.slice';
+import authSlice from "./slices/auth.slice"
 
 const rootReducer = combineReducers({
   shoppingCart: productsSlice,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   sale: saleSlice,
   best_sellers: bestSellersSlice,
   categories: categoriesSlice,
-  test: testSlice
+  test: testSlice,
+  auth: authSlice
 })
 
 export const store = configureStore({

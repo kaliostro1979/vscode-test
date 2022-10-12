@@ -3,6 +3,7 @@ import { Col } from 'react-bootstrap'
 import { currencyFormatter } from '../../utils/helpers'
 import StarIcon from './../../icons/StarIcon';
 import ShoppingPlaceholder from './../shopping-placeholder/ShoppingPlaceholder';
+import { Link } from 'react-router-dom';
 
 const BestSellersCard = ({ product }) => {
   const rate = Array.from({ length: 5 }, (v, i) => i)
@@ -15,7 +16,15 @@ const BestSellersCard = ({ product }) => {
           <ShoppingPlaceholder />
         </div>
         <div className="BestSellersCardMeta">
-          <p className="BestSellersCardTitle">{product.title}</p>
+          <Link
+            to={{
+              pathname: `/store/${product._id}`,
+              search: `?prodcut=${product._id}`,
+            }}
+            className="BestSellersCardTitle"
+          >
+            {product.title}
+          </Link>
           <div className="BestSellersCardRate">
             <ul className="BestSellersCardRateStars">
               {rate.map((item, index) => {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleProduct } from '../redux/slices/products.slice';
@@ -11,7 +11,7 @@ const Product = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-      dispatch(getSingleProduct(params.id))
+       dispatch(getSingleProduct(params.id))
     }, [dispatch, params])
     
     return (

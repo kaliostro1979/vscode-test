@@ -25,7 +25,7 @@ const Store = () => {
           products &&
           products.map((product) => {
             return (
-              <ProductCard {...product} product={product} key={product.id} />
+              <ProductCard {...product} product={product} key={product._id} />
             )
           })
         )}

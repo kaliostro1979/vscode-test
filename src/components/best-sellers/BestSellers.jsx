@@ -14,13 +14,13 @@ const BestSellers = () => {
     useEffect(() => {
       dispatch(getBestSellersProductsByCategory(activeCategory))
     }, [dispatch, activeCategory])
-
+    
     return (
       <>
         <Row className="BestSellers" lg={4}>
-          {activeCategoriesProducts.data ?
-            activeCategoriesProducts.data.map((product) => {
-              return <BestSellersCard product={product} key={product.id}/>
+          {activeCategoriesProducts ?
+            activeCategoriesProducts.map((product) => {
+              return <BestSellersCard product={product} key={product._id}/>
             }) : <Preloader/>}
         </Row>
       </>
