@@ -12,7 +12,7 @@ import Registration from "../admin-dashboard/pages/auth/Registration";
 import AdminHome from "../admin-dashboard/pages/AdminHome";
 import AdminBestSellers from "../admin-dashboard/components/admin-best-sellers/AdminBestSellers";
 import AdminProducts from "../admin-dashboard/components/AdminProducts";
-import AddNewProductForm from "../admin-dashboard/components/add-new-product/AddNewProductForm";
+import AddNewProductForm from './../admin-dashboard/components/add-new-product/AddNewProductForm';
 
 
 
