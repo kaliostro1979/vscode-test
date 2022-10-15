@@ -8,6 +8,7 @@ const AdminSidebar = () => {
             <ul>
                 <li><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"products"}>Products</NavLink></li>
                 <li><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"best-sellers"}>Best sellers</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"add-new-product"}>Add new product</NavLink></li>
             </ul>
         </div>
     );
