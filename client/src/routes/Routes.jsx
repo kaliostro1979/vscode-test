@@ -12,6 +12,7 @@ import Registration from "../admin-dashboard/pages/auth/Registration";
 import AdminHome from "../admin-dashboard/pages/AdminHome";
 import AdminBestSellers from "../admin-dashboard/components/admin-best-sellers/AdminBestSellers";
 import AdminProducts from "../admin-dashboard/components/AdminProducts";
+import AddNewProductForm from "../admin-dashboard/components/add-new-product/AddNewProductForm";
 
 
 
@@ -25,6 +26,7 @@ const RoutesContainer = () => {
                     <Route index element={<Navigate to={"products"} replace/>}/>
                     <Route exact path={"products"} element={<AdminProducts/>}/>
                     <Route exact path={"best-sellers"} element={<AdminBestSellers/>}/>
+                    <Route exact path={"add-new-product"} element={<AddNewProductForm/>}/>
                 </Route>
                 <Route path={"login"} element={<Login/>}/>
                 <Route path={"registration"} element={<Registration/>}/>

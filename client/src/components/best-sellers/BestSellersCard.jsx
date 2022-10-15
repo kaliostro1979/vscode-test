@@ -12,7 +12,14 @@ const BestSellersCard = ({ product }) => {
     <Col className="mb-4">
       <div className="BestSellersCard">
         <div className="BestSellersCardImage">
-          <img src={product.image} alt={product.title} />
+          <img
+            src={
+              !product.image.includes('https')
+                ? `${process.env.REACT_APP_IMAGE_PATH}` + product.image
+                : product.image
+            }
+            alt={product.title}
+          />
           <ShoppingPlaceholder />
         </div>
         <div className="BestSellersCardMeta">

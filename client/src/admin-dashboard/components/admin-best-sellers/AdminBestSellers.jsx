@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {ListGroup} from "react-bootstrap";
 import {getBestSellersProductsByCategory} from "../../../redux/slices/best_sellers.slice";
 import AdminProductsItem from "./AdminProductsItem";
-import ProductModal from "../modal/ProductModal";
 import {Context} from "../../../context/Context";
 
 const AdminBestSellers = () => {

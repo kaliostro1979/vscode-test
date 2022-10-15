@@ -12,11 +12,13 @@ const bestSellers = require('./routes/best_sellers')
 const login = require('./routes/auth/auth')
 const registration = require('./routes/auth/auth')
 const logout = require('./routes/auth/auth')
+const addNewProduct = require('./routes/add-new-product')
 
 require('dotenv').config()
 
 app.use(cors())
 app.use(express.json())
+app.use('/public', express.static('public'))
 
 app.use('/products', products)
 app.use('/banner', banner)
@@ -26,6 +28,7 @@ app.use('/best-sellers', bestSellers)
 app.use('/', login)
 app.use('/', registration)
 app.use('/', logout)
+app.use('/', addNewProduct)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,

@@ -23,7 +23,14 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
     <Col key={_id}>
       <div className="ProiductCard mb-4">
         <div className="ProductCradImage">
-          <img src={image} alt={title} />
+          <img
+            src={
+              !image.includes('https')
+                ? `${process.env.REACT_APP_IMAGE_PATH}` + image
+                : image
+            }
+            alt={title}
+          />
         </div>
         <div className="ProductCradMeta">
           <div className="ProductMetaInfo d-flex align-items-baseline pt-3 pb-4">

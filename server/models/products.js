@@ -8,7 +8,9 @@ const productSchema = mongoose.Schema({
   sale_price: {type: String},
   category: {type: String},
   on_stock: {type: Number},
-  best_seller: {type: Boolean}
+  best_seller: {type: Boolean},
+  sale: {type: Number},
+  
 })
 
 module.exports = mongoose.model('Products', productSchema)
