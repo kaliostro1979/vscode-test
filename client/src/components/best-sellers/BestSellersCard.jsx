@@ -14,7 +14,7 @@ const BestSellersCard = ({ product }) => {
         <div className="BestSellersCardImage">
           <img
             src={
-              !product.image.includes('https')
+              product.image && !product.image.includes('https')
                 ? `${process.env.REACT_APP_IMAGE_PATH}` + product.image
                 : product.image
             }
@@ -61,10 +61,14 @@ const BestSellersCard = ({ product }) => {
             <p className="BestSellersCardPrice">
               {currencyFormatter.format(product.price)}
             </p>
-            <p className="BestSellersCardSellPrice">
-              {currencyFormatter.format(product.sale_price)}
-            </p>
-            <p className="BestSellersCardSale">{product.sale}% Off</p>
+            {
+              product.sale ? <>
+                <p className="BestSellersCardSellPrice">
+                  {currencyFormatter.format(product.sale_price)}
+                </p>
+                <p className="BestSellersCardSale">{product.sale}% Off</p>
+              </> : null
+            }
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 .ProductCradImage {
 
-
     img {
         width: 100%;
         height: 500px;
@@ -12,4 +11,16 @@
 .ProductCardButton {
     display: flex;
     align-items: center;
+}
+
+.ProductCardTitle {
+    p {
+        font-size: 24px !important;
+    }
+}
+
+.ProductMetaInfoLink {
+    display: inline-block;
+    min-height: 84px;
+    font-size: 18px;
 }

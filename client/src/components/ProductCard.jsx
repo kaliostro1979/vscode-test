@@ -21,7 +21,7 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
 
   return (
     <Col key={_id}>
-      <div className="ProiductCard mb-4">
+      <div className="ProiductCard mb-5">
         <div className="ProductCradImage">
           <img
             src={
@@ -35,6 +35,7 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
         <div className="ProductCradMeta">
           <div className="ProductMetaInfo d-flex align-items-baseline pt-3 pb-4">
             <Link
+            className='ProductMetaInfoLink'
               to={{
                 pathname: `/store/${product._id}`,
                 search: `?product=${product._id}`,

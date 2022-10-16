@@ -15,10 +15,19 @@ export const getCategories = createAsyncThunk(
   }
 )
 
+export const addCategory = createAsyncThunk('categories/addCategory', async (name, {rejectWithValue})=>{
+  return await fetch(`${URL}/admin/add-category`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({name: name})
+  }).then(res=>res.json()).then(data=>data)
+})
+
 const categoriesSlice = createSlice({
   name: 'categories',
   initialState: {
     categories: [],
+    category: {},
     isLoading: false,
     error: null
   },
@@ -34,6 +43,9 @@ const categoriesSlice = createSlice({
     [getCategories.rejected]: (state, action) => {
         state.isLoading = false
         state.error = action.payload
+    },
+    [addCategory.fulfilled]: (state, action)=>{
+      state.category = action.payload
     }
   },
 })

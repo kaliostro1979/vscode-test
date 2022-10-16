@@ -13,4 +13,9 @@ router.get('/', function(req, res){
     })
 })
 
+router.post('/admin/add-category', function(req, res){
+    const category = Categories.create({name: req.body.name})
+    res.send({status: "ok", category})
+})
+
 module.exports = router

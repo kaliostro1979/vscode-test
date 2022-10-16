@@ -14,7 +14,7 @@ const registration = require('./routes/auth/auth')
 const logout = require('./routes/auth/auth')
 const addNewProduct = require('./routes/add-new-product')
 const removeProduct = require('./routes/remove-product')
-
+const addCategory = require('./routes/categories')
 
 require('dotenv').config()
 
@@ -32,6 +32,7 @@ app.use('/', registration)
 app.use('/', logout)
 app.use('/', addNewProduct)
 app.use('/', removeProduct)
+app.use('/', addCategory)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,

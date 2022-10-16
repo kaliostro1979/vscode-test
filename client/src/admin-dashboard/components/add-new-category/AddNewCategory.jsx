@@ -3,9 +3,12 @@ import { Form } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addCategory } from '../../../redux/slices/catyegory.slice';
 
 const AddNewCategory = () => {
     const [categoryName, setCategoryName] = useState('')
+    const dispatch = useDispatch()
 
     const handleChange = (e)=>{
         setCategoryName(e.target.value)
@@ -13,6 +16,7 @@ const AddNewCategory = () => {
 
     const handleFormSubmit = (e)=>{
         e.preventDefault()
+        dispatch(addCategory(categoryName.toLowerCase()))
     }
 
     return (

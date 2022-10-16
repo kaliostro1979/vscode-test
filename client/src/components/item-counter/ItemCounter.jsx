@@ -4,7 +4,7 @@ import PlusIcon from './../../icons/PlusIcon';
 import MinusIcon from './../../icons/MinusIcon';
 
 
-const ItemCounter = ({ setProductQuantity, productQuantity }) => {
+const ItemCounter = ({ setProductQuantity, productQuantity, product }) => {
 
     const handleIncrementCount = () => {
         setProductQuantity((prev) => prev + 1)
@@ -13,6 +13,9 @@ const ItemCounter = ({ setProductQuantity, productQuantity }) => {
     const handleDecrementCount = () => {
         setProductQuantity((prev) => prev - 1)
     }
+
+    console.log(product.on_stock >= productQuantity);
+
 
     return (
         <div className="ItemCounter">
@@ -34,6 +37,7 @@ const ItemCounter = ({ setProductQuantity, productQuantity }) => {
                 variant="outline-secondary"
                 className="ItemCounterButton"
                 onClick={() => handleIncrementCount()}
+                disabled={product.on_stock && product.on_stock <= productQuantity}
             >
                 <PlusIcon/>
             </Button>

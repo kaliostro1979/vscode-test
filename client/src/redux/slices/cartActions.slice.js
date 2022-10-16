@@ -15,17 +15,17 @@ const cartAction = createSlice({
             const currentProduct = action.payload[0]
             const quantity = action.payload[1]
 
-            if (!cartProducts || cartProducts.filter((product) => product.id === currentProduct.id).length <= 0) {
+            if (!cartProducts || cartProducts.filter((product) => product._id === currentProduct._id).length <= 0) {
                 state.cartItems.push(currentProduct)
             }else {
-                cartProducts.find((product) => product.id === currentProduct.id).qnty = quantity
+                cartProducts.find((product) => product._id === currentProduct._id).qnty = quantity
                 state.cartItems = cartProducts
             }
             window.localStorage.setItem('added_product', JSON.stringify(state.cartItems))
         },
         removeProductFromCart(state, action) {
             const cartProducts = JSON.parse(window.localStorage.getItem('added_product'))
-            state.cartItems = cartProducts.filter((product) => product.id !== action.payload)
+            state.cartItems = cartProducts.filter((product) => product._id !== action.payload)
             window.localStorage.setItem('added_product', JSON.stringify(state.cartItems))
         },
         removeAllProductsFromCart(state) {
