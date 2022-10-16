@@ -17,7 +17,11 @@ const MiniCardItem = ({ id, name, image, price, qnty }) => {
   return (
     <div className="MiniCardItem">
       <div className="MiniCardItemImage">
-        <img src={image} alt={name} />
+        <img src={
+              !image.includes('https')
+                ? `${process.env.REACT_APP_IMAGE_PATH}` + image
+                : image
+            } alt={name} />
       </div>
       <div className="MiniCardMeta">
         <p>{name}</p>

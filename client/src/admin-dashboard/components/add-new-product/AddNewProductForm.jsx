@@ -197,6 +197,7 @@ const AddNewProductForm = () => {
                                 return (
                                     <option
                                         value={category.name}
+                                        key={category._id}
                                     >
                                         {category.name}
                                     </option>

@@ -21,7 +21,7 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
 
   return (
     <Col key={_id}>
-      <div className="ProiductCard mb-4">x
+      <div className="ProiductCard mb-4">
         <div className="ProductCradImage">
           <img
             src={

@@ -1,12 +1,21 @@
 import React, { useContext } from 'react'
 import {Button, Col, Row} from "react-bootstrap";
 import {Context} from "../../../context/Context";
+import { useDispatch } from 'react-redux';
+import { removeProduct } from './../../../redux/slices/removeProduct.slice';
+import { getProducts } from './../../../redux/slices//products.slice';
 
 const AdminProductsItem = ({product, button_text, edit}) => {
     const {setShowModal, setActiveProduct} = useContext(Context);
+    const dispatch = useDispatch()
     const handleClick = ()=>{
         setShowModal(true)
         setActiveProduct(product)
+    }
+
+    const handleRemoveItem =(id)=>{
+        dispatch(removeProduct(id))
+        dispatch(getProducts())
     }
     
     return (
@@ -59,7 +68,7 @@ const AdminProductsItem = ({product, button_text, edit}) => {
         <Col className={'col-2'}>
           <ul>
             <li>
-              <Button variant={'danger'} className={'mb-3 w-100'}>
+              <Button variant={'danger'} className={'mb-3 w-100'} onClick={()=>handleRemoveItem(product._id)}>
                 {button_text}
               </Button>
             </li>

@@ -12,6 +12,7 @@ const AdminProducts = () => {
         dispatch(getProducts())
     }, [dispatch])
 
+
     return (
         <div>
             <h1>Products</h1>
