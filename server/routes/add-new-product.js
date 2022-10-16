@@ -19,8 +19,29 @@ const upload = multer({ storage: storage })
 
 router.post('/admin/add-new-product', upload.single('image'), async (req, res)=>{
     const image = (req.file) ? req.file.filename : null
-    const {title, rate, category, on_stock, description, price, sale_price, sale} = req.body
-    const product = new Product({title, rate, image, category, on_stock, description, price, sale_price, sale})
+    const {
+      title,
+      rate,
+      category,
+      on_stock,
+      description,
+      price,
+      sale_price,
+      sale,
+      best_seller,
+    } = req.body
+    const product = new Product({
+      title,
+      rate,
+      image,
+      category,
+      on_stock,
+      description,
+      price,
+      sale_price,
+      sale,
+      best_seller,
+    })
     let response = await product.save()
     res.send({product, status: 'ok'})
 })

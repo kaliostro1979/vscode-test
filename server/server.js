@@ -15,6 +15,7 @@ const logout = require('./routes/auth/auth')
 const addNewProduct = require('./routes/add-new-product')
 const removeProduct = require('./routes/remove-product')
 
+
 require('dotenv').config()
 
 app.use(cors())

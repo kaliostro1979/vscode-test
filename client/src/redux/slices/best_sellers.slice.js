@@ -24,14 +24,14 @@ const bestSellersSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [getBestSellersProductsByCategory.pending]: (state, action)=>{
+    [getBestSellersProductsByCategory.pending]: (state, action) => {
       state.isLoading = true
     },
-    [getBestSellersProductsByCategory.fulfilled]: (state, action)=>{
+    [getBestSellersProductsByCategory.fulfilled]: (state, action) => {
       state.isLoading = false
       state.products = action.payload
     },
-    [getBestSellersProductsByCategory.rejected]: (state, action)=>{
+    [getBestSellersProductsByCategory.rejected]: (state, action) => {
       state.isLoading = false
       state.error = action.payload
     }

@@ -14,17 +14,18 @@ const AdminProductsItem = ({product, button_text, edit}) => {
     }
 
     const handleRemoveItem =(id)=>{
+        window.confirm('Are you sure want to remove this product?')
         dispatch(removeProduct(id))
         dispatch(getProducts())
     }
-    
+
     return (
       <Row>
         <Col className={'col-1'}>
           <div className={'Image'}>
             <img
               src={
-                !product.image.includes('https')
+                product.image && !product.image.includes('https')
                   ? `${process.env.REACT_APP_IMAGE_PATH}` + product.image
                   : product.image
               }

@@ -9,6 +9,7 @@ import categoriesSlice from './slices/catyegory.slice'
 import testSlice from './slices/test.slice';
 import authSlice from "./slices/auth.slice"
 import removeProductSlice from './slices/removeProduct.slice';
+import addNewProductSlice from './slices/addNewProduct.slice';
 
 const rootReducer = combineReducers({
   shoppingCart: productsSlice,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   categories: categoriesSlice,
   test: testSlice,
   auth: authSlice,
-  removeProduct: removeProductSlice
+  removeProduct: removeProductSlice,
+  addedProduct: addNewProductSlice
 })
 
 export const store = configureStore({
