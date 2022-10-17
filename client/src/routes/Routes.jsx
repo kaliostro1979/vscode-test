@@ -6,7 +6,6 @@ import Product from './../pages/Product';
 import About from './../pages/About';
 import Cart from './../pages/Cart';
 import PageNotFound from './../pages/PageNotFound';
-import Test from './../components/Test';
 import Login from "../admin-dashboard/pages/auth/Login";
 import Registration from "../admin-dashboard/pages/auth/Registration";
 import AdminHome from "../admin-dashboard/pages/AdminHome";
@@ -44,7 +43,6 @@ const RoutesContainer = () => {
         <Route path={'/store/:id'} element={<Product />} />
         <Route path={'/about'} element={<About />} />
         <Route path={'/cart'} element={<Cart />} />
-        <Route path={'/test'} element={<Test />} />
         <Route path={'*'} element={<PageNotFound />} />
       </Routes>
     )

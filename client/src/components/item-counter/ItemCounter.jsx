@@ -14,9 +14,6 @@ const ItemCounter = ({ setProductQuantity, productQuantity, product }) => {
         setProductQuantity((prev) => prev - 1)
     }
 
-    console.log(product.on_stock >= productQuantity);
-
-
     return (
         <div className="ItemCounter">
             <Button

@@ -4,7 +4,7 @@ import {ListGroup} from "react-bootstrap";
 import {getBestSellersProductsByCategory} from "../../../redux/slices/best_sellers.slice";
 import AdminProductsItem from "./AdminProductsItem";
 import {Context} from "../../../context/Context";
-import { removeFromBestSeller } from '../../../redux/slices/products.slice';
+import { addRemoveFromBestSeller } from '../../../redux/slices/products.slice';
 
 const AdminBestSellers = () => {
     const dispatch = useDispatch()
@@ -16,7 +16,7 @@ const AdminBestSellers = () => {
     }, [dispatch])
 
     const removeFromBestsellerHandler = (arg)=>{
-        dispatch(removeFromBestSeller({id: arg.id, status: arg.status}))
+        dispatch(addRemoveFromBestSeller({id: arg.id, status: arg.status}))
         dispatch(getBestSellersProductsByCategory("all"))
       }
 
@@ -28,9 +28,9 @@ const AdminBestSellers = () => {
                     bestSellerProducts && bestSellerProducts.map((product)=>{
                         return (
                             <ListGroup.Item key={product._id} onClick={()=>setActiveProduct(product)} className={"AdminProductsListItem"}>
-                                <AdminProductsItem 
-                                product={product} 
-                                button_text={"Remove from best sellers"} 
+                                <AdminProductsItem
+                                product={product}
+                                button_text={"Remove from best sellers"}
                                 edit={false}
                                 callBack={removeFromBestsellerHandler}
                                 />

@@ -10,7 +10,7 @@ const productSchema = mongoose.Schema({
   on_stock: {type: Number},
   best_seller: {type: Boolean},
   sale: {type: Number},
-  
+  description: {type: String}
 })
 
 module.exports = mongoose.model('Products', productSchema)

@@ -45,7 +45,9 @@ const AdminHome = () => {
                     </Col>
                 </Row>
             </Container>
-            <ProductModal product={activeProduct}/>
+            {
+                activeProduct ? <ProductModal product={activeProduct}/> : null
+            }
         </>
     );
 };

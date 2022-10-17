@@ -13,7 +13,7 @@ router.get('/products', function (req, res) {
       }
     })
   }
-  
+
   if (Object.keys(req.query).includes('id')) {
     Products.findOne({ _id: req.query.id }, function (err, product) {
       if (err) {
@@ -27,6 +27,11 @@ router.get('/products', function (req, res) {
 
 router.get('/product-remove-bestseller', async function(req, res){
   const product = await Products.findOneAndUpdate({ _id: req.query.id }, {best_seller: req.query.status})
+  res.json(product)
+})
+
+router.get('/product-change-category', async function(req, res){
+  const product = await Products.findOneAndUpdate({ _id: req.query.id }, {category: req.query.category})
   res.json(product)
 })
 

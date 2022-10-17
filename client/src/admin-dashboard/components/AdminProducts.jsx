@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts} from "../../redux/slices/products.slice";
 import AdminProductsItem from "./admin-best-sellers/AdminProductsItem";
@@ -13,7 +13,7 @@ const AdminProducts = () => {
         window.confirm('Are you sure want to remove this product?')
         dispatch(removeProduct(id))
     }
-     
+
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])

@@ -9,7 +9,7 @@ export const removeProduct = createAsyncThunk('remove_product/removeProduct', as
     }).then(res=>res.json()).then(data=>data)
 })
 
-const removePrductSlice = createSlice({
+const removeProductSlice = createSlice({
     name: "remove_product",
     initialState: {
         product: {}
@@ -22,4 +22,4 @@ const removePrductSlice = createSlice({
     }
 })
 
-export default removePrductSlice.reducer
+export default removeProductSlice.reducer

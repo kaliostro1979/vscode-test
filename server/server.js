@@ -16,6 +16,8 @@ const addNewProduct = require('./routes/add-new-product')
 const removeProduct = require('./routes/remove-product')
 const addCategory = require('./routes/categories')
 const removeFromBestseller = require('./routes/products')
+const changeProductCategory = require('./routes/products')
+const editProduct = require('./routes/edit-product')
 
 require('dotenv').config()
 
@@ -35,6 +37,8 @@ app.use('/', addNewProduct)
 app.use('/', removeProduct)
 app.use('/', addCategory)
 app.use('/', removeFromBestseller)
+app.use('/', changeProductCategory)
+app.use('/', editProduct)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,
