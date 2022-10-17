@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const BestSellersCard = ({ product }) => {
   const rate = Array.from({ length: 5 }, (v, i) => i)
 
+
   return (
     <Col className="mb-4">
       <div className="BestSellersCard">

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {URL} from "../../utils/helpers"
 
 export const removeProduct = createAsyncThunk('remove_product/removeProduct', async (id, {rejectWithValue})=>{
-    await fetch(`${URL}/admin/remove-item`, {
+    await fetch(`${URL}/admin/remove-item?id=${id.id}`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({_id: id})

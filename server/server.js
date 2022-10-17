@@ -15,6 +15,7 @@ const logout = require('./routes/auth/auth')
 const addNewProduct = require('./routes/add-new-product')
 const removeProduct = require('./routes/remove-product')
 const addCategory = require('./routes/categories')
+const removeFromBestseller = require('./routes/products')
 
 require('dotenv').config()
 
@@ -22,7 +23,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/public', express.static('public'))
 
-app.use('/products', products)
+app.use('/', products)
 app.use('/banner', banner)
 app.use('/sale', sale)
 app.use('/categories', categories)
@@ -33,6 +34,7 @@ app.use('/', logout)
 app.use('/', addNewProduct)
 app.use('/', removeProduct)
 app.use('/', addCategory)
+app.use('/', removeFromBestseller)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,

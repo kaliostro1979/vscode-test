@@ -203,7 +203,7 @@ const AddNewProductForm = () => {
               name={'category'}
               style={{ textTransform: 'capitalize' }}
             >
-                <option disabled selected>Select category</option>
+                <option disabled defaultValue="select category">Select category</option>
               {categories.map((category) => {
                 return (
                   <option value={category.name} key={category._id}>

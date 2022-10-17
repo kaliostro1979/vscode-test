@@ -17,8 +17,21 @@ export const getProducts = createAsyncThunk(
 )
 
 export const getSingleProduct = createAsyncThunk('cart/getSingleProduct', async (id, {rejectWithValue})=>{
+  
   try {
     const product = await fetch(`${URL}/products?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => data)
+    return product
+  } catch (error) {
+    rejectWithValue(error)
+  }
+})
+
+export const removeFromBestSeller = createAsyncThunk('cart/removeFromBestSeller', async (arg, {rejectWithValue})=>{
+
+  try {
+    const product = await fetch(`${URL}/product-remove-bestseller?id=${arg.id}&status=${arg.status}`)
       .then((res) => res.json())
       .then((data) => data)
     return product
@@ -59,6 +72,10 @@ const productsSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    [removeFromBestSeller.fulfilled]: (state, action) => {
+      state.isLoading = false
+      state.product = action.payload
+    }
   },
 })
 

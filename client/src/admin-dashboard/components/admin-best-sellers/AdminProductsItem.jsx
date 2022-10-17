@@ -1,22 +1,12 @@
 import React, { useContext } from 'react'
 import {Button, Col, Row} from "react-bootstrap";
 import {Context} from "../../../context/Context";
-import { useDispatch } from 'react-redux';
-import { removeProduct } from './../../../redux/slices/removeProduct.slice';
-import { getProducts } from './../../../redux/slices//products.slice';
 
-const AdminProductsItem = ({product, button_text, edit}) => {
+const AdminProductsItem = ({product, button_text, edit, callBack}) => {
     const {setShowModal, setActiveProduct} = useContext(Context);
-    const dispatch = useDispatch()
     const handleClick = ()=>{
         setShowModal(true)
         setActiveProduct(product)
-    }
-
-    const handleRemoveItem =(id)=>{
-        window.confirm('Are you sure want to remove this product?')
-        dispatch(removeProduct(id))
-        dispatch(getProducts())
     }
 
     return (
@@ -44,32 +34,32 @@ const AdminProductsItem = ({product, button_text, edit}) => {
           </Col>
         ) : null}
 
-        {product.sale_price ? (
           <Col>
-            <p className={'Text'}>{product.sale_price}</p>
+              {product.sale_price ? (
+                  <p className={'Text'}>{product.sale_price}</p>
+              ) : <p className={'Text'}>-</p>}
           </Col>
-        ) : null}
+          <Col>
+              {product.rate ? (
+                  <p className={'Text'}>{product.rate}</p>
+              ) : <p className={'Text'}>-</p>}
+          </Col>
+          <Col>
+              {product.category ? (
+                  <p className={'Text'}>{product.category}</p>
+              ) : null}
+          </Col>
+          <Col>
+              {product.sale ? (
+                  <p className={'Text'}>{product.sale}%</p>
+              ) : <p className={'Text'}>-</p>}
+          </Col>
 
-        {product.rate ? (
-          <Col>
-            <p className={'Text'}>{product.rate}</p>
-          </Col>
-        ) : null}
-        {product.category ? (
-          <Col>
-            <p className={'Text'}>{product.category}</p>
-          </Col>
-        ) : null}
-        {product.sale ? (
-          <Col>
-            <p className={'Text'}>{product.sale}%</p>
-          </Col>
-        ) : null}
 
         <Col className={'col-2'}>
           <ul>
             <li>
-              <Button variant={'danger'} className={'mb-3 w-100'} onClick={()=>handleRemoveItem(product._id)}>
+              <Button variant={'danger'} className={'mb-3 w-100'} onClick={()=>callBack({id: product._id, status: false})}>
                 {button_text}
               </Button>
             </li>

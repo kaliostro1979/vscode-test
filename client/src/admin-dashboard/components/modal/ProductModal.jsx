@@ -2,9 +2,12 @@ import React, {useContext} from 'react';
 import {Context} from "../../../context/Context";
 import Modal from 'react-modal';
 import {Button, Form, Navbar} from "react-bootstrap";
+import { getProducts, removeFromBestSeller } from './../../../redux/slices/products.slice';
+import { useDispatch } from 'react-redux';
 
 const ProductModal = ({product}) => {
     const {showModal, setShowModal} = useContext(Context);
+    const dispatch = useDispatch()
 
     const customStyles = {
         content: {
@@ -18,10 +21,18 @@ const ProductModal = ({product}) => {
         },
     };
 
-    function closeModal() {
+    console.log(product);
+
+    const addToBestsellerHandler = (id, status)=>{
+        dispatch(removeFromBestSeller({id, status: true}))
+        dispatch(getProducts())
         setShowModal(false);
     }
 
+    function closeModal() {
+        setShowModal(false);
+    }
+    
     return (
         <Modal
             isOpen={showModal}
@@ -35,6 +46,10 @@ const ProductModal = ({product}) => {
             </Navbar>
             <Form>
                 <h2>{product && product.price}</h2>
+                <Button 
+                onClick={()=>addToBestsellerHandler(product._id, product.best_seller)}
+                disabled={product && product.best_seller}
+                >Add to bestseller</Button>
             </Form>
         </Modal>
     );
