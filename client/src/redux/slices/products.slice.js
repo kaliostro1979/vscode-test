@@ -28,28 +28,16 @@ export const getSingleProduct = createAsyncThunk('cart/getSingleProduct', async 
   }
 })
 
-export const addRemoveFromBestSeller = createAsyncThunk('cart/addRemoveFromBestSeller', async (arg, {rejectWithValue})=>{
-
-  try {
-    const product = await fetch(`${URL}/product-remove-bestseller?id=${arg.id}&status=${arg.status}`)
-      .then((res) => res.json())
-      .then((data) => data)
-    return product
-  } catch (error) {
-    rejectWithValue(error)
-  }
+export const removeProduct = createAsyncThunk('cart/removeProduct', async (id, {rejectWithValue})=>{
+  const products = await fetch(`${URL}/admin/remove-item?id=${id.id}`).then(res=>res.json()).then(data=>data)
+  console.log(products)
+  return products
 })
 
-export const changeProductCategory = createAsyncThunk('cart/changeProductCategory', async (arg, {rejectWithValue})=>{
-  console.log(arg)
-  try {
-    const product = await fetch(`${URL}/product-change-category?id=${arg.id}&category=${arg.category}`)
-        .then((res) => res.json())
-        .then((data) => data)
-    return product
-  } catch (error) {
-    rejectWithValue(error)
-  }
+export const editProduct = createAsyncThunk('edit_product/editProduct', async (product, {rejectWithValue})=>{
+  return await fetch(`${URL}/admin/edit-product?id=${product._id}&price=${product.price}&sale_price=${product.sale_price}&sale=${product.sale}&category=${product.category}&description=${product.description}&best_seller=${product.best_seller}`)
+      .then(res=>res.json())
+      .then(data=>data)
 })
 
 const productsSlice = createSlice({
@@ -84,13 +72,11 @@ const productsSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [addRemoveFromBestSeller.fulfilled]: (state, action) => {
-      state.isLoading = false
-      state.product = action.payload
+    [removeProduct.fulfilled]: (state, action)=>{
+      state.products = action.payload
     },
-    [changeProductCategory.fulfilled]: (state, action) => {
-      state.isLoading = false
-      state.product = action.payload
+    [editProduct.fulfilled]: (state, action)=>{
+      state.products = action.payload
     }
   },
 })

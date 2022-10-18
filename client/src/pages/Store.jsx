@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { Row, Container } from 'react-bootstrap'
+import {Row, Container, Col} from 'react-bootstrap'
 import ProductCard from './../components/ProductCard'
 import { useSelector, useDispatch } from 'react-redux'
 import Preloader from './../components/Preloader'
 import { getProducts } from '../redux/slices/products.slice'
+import Categories from "../components/categories/Categories";
 
 const Store = () => {
   const products = useSelector((state) => state.main.shoppingCart.products)
@@ -17,6 +18,11 @@ const Store = () => {
 
   return (
     <Container>
+      <Row>
+        <Col>
+          <Categories />
+        </Col>
+      </Row>
       <Row md={2} xs={1} lg={3}>
         {error ? <p>{error}</p> : null}
         {isLoading ? (

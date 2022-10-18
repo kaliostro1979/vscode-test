@@ -1,10 +1,9 @@
 import React, {useContext, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {ListGroup} from "react-bootstrap";
-import {getBestSellersProductsByCategory} from "../../../redux/slices/best_sellers.slice";
+import {addRemoveFromBestSeller, getBestSellersProductsByCategory} from "../../../redux/slices/best_sellers.slice";
 import AdminProductsItem from "./AdminProductsItem";
 import {Context} from "../../../context/Context";
-import { addRemoveFromBestSeller } from '../../../redux/slices/products.slice';
 
 const AdminBestSellers = () => {
     const dispatch = useDispatch()
@@ -12,12 +11,12 @@ const AdminBestSellers = () => {
     const {setActiveProduct} = useContext(Context);
 
     useEffect(() => {
-        dispatch(getBestSellersProductsByCategory("all"))
+        dispatch(getBestSellersProductsByCategory())
     }, [dispatch])
 
     const removeFromBestsellerHandler = (arg)=>{
         dispatch(addRemoveFromBestSeller({id: arg.id, status: arg.status}))
-        dispatch(getBestSellersProductsByCategory("all"))
+        dispatch(getBestSellersProductsByCategory())
       }
 
     return (

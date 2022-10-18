@@ -3,7 +3,7 @@ import { URL } from '../../utils/helpers'
 
 export const getBestSellersProductsByCategory = createAsyncThunk(
   'best_sellers/getBestSellersProductsByCategory',
-  async (category, { rejectWithValue }) => {
+  async (category='all', { rejectWithValue }) => {
     try {
       const products = await fetch(`${URL}/best-sellers?category=${category}`)
         .then((res) => res.json())
@@ -14,6 +14,17 @@ export const getBestSellersProductsByCategory = createAsyncThunk(
     }
   }
 )
+
+export const addRemoveFromBestSeller = createAsyncThunk('cart/addRemoveFromBestSeller', async (arg, {rejectWithValue})=>{
+  try {
+    const products = await fetch(`${URL}/product-remove-bestseller?id=${arg.id}&status=${arg.status}`)
+        .then((res) => res.json())
+        .then((data) => data)
+    return products
+  } catch (error) {
+    rejectWithValue(error)
+  }
+})
 
 const bestSellersSlice = createSlice({
   name: 'best_sellers',
@@ -34,6 +45,10 @@ const bestSellersSlice = createSlice({
     [getBestSellersProductsByCategory.rejected]: (state, action) => {
       state.isLoading = false
       state.error = action.payload
+    },
+    [addRemoveFromBestSeller.fulfilled]: (state, action) => {
+      state.isLoading = false
+      state.products = action.payload
     }
   },
 })

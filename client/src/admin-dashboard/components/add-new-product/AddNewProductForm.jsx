@@ -42,11 +42,12 @@ const AddNewProductForm = () => {
       case 'product_price':
         setPrice(event.target.value)
         break
-      case 'sale_price':
-        setSalePrice(event.target.value)
-        break
+      /*case 'sale_price':
+        setSalePrice(sale ? Math.floor(price - price * event.target.value / 100).toFixed(2) : "")
+        break*/
       case 'sale':
         setSale(event.target.value)
+        setSalePrice(sale ? Math.floor(price - price * event.target.value / 100).toFixed(2) : "")
         break
       case 'has_sale':
         setHasSale(event.target.checked)
@@ -80,14 +81,15 @@ const AddNewProductForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault()
     dispatch(addNewProduct(formData))
- 
+
     setTitle('')
     setDescription('')
     setPrice('')
     setSalePrice('')
     setSale('')
     setOnStock('')
-    setHasSale('')
+    setHasSale(false)
+    setBestSeller(false)
 
     imageRef.current.value = null
   }
@@ -157,6 +159,7 @@ const AddNewProductForm = () => {
                 id={`has_sale`}
                 name={'has_sale'}
                 onChange={handleChange}
+                checked={hasSale}
               />
             </Form.Group>
           </Col>
@@ -168,7 +171,7 @@ const AddNewProductForm = () => {
                 name={'sale_price'}
                 onChange={handleChange}
                 value={salePrice}
-                disabled={!hasSale}
+                disabled={true}
               />
             </Form.Group>
           </Col>
@@ -221,6 +224,7 @@ const AddNewProductForm = () => {
                 id={`best_seller`}
                 name={'best_seller'}
                 onChange={handleChange}
+                checked={bestSeller}
               />
             </Form.Group>
           </Col>

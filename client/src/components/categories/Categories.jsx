@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCategories } from './../../redux/slices/catyegory.slice'
-import { Context } from './../../context/Context';
+import {Context} from "../../context/Context";
+import {getCategories} from "../../redux/slices/catyegory.slice";
+
 
 const Categories = () => {
   const dispatch = useDispatch()
@@ -14,16 +15,29 @@ const Categories = () => {
     dispatch(getCategories())
   }, [dispatch])
 
+  useEffect(()=>{
+    setActiveCategory('all')
+  }, [setActiveCategory])
+
   const handleClick = (category)=>{
     setActiveCategory(category)
   }
-  
+
   return (
     <Row>
       <Col>
         <div className="CategoriesListWrapper">
           <ul className="CategoriesList">
-            {categories.map((category) => {
+            <li
+                className={
+                  activeCategory === "all"
+                      ? 'CategoriesListItem Active'
+                      : 'CategoriesListItem'
+                }
+                onClick={() => handleClick("all")}
+            >all
+            </li>
+            {categories && categories.map((category) => {
               return (
                 <li
                   key={category._id}

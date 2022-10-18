@@ -3,18 +3,18 @@ import {Context} from "../../../context/Context";
 import Modal from 'react-modal';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from 'react-redux';
-import {addRemoveFromBestSeller, getProducts} from "../../../redux/slices/products.slice";
+import {editProduct, getProducts} from "../../../redux/slices/products.slice";
 import {getCategories} from "../../../redux/slices/catyegory.slice";
 import CloseIcon from "../../../icons/CloseIcon";
-import {editProduct} from "../../../redux/slices/editProduct.slice";
 
 const ProductModal = ({product}) => {
 
-    const [price, setPrice] = useState(product.price)
-    const [salePrice, setSalePrice] = useState(product.sale_price)
+    const [price, setPrice] = useState("")
+    const [salePrice, setSalePrice] = useState("")
     const [sale, setSale] = useState(product.sale)
-    const [description, setDescription] = useState(product.description)
-    const [category, setCategory] = useState(product.category)
+    const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
+    const [bestSeller, setBestSeller] = useState(false)
 
     const formRef= useRef()
     const {showModal, setShowModal} = useContext(Context);
@@ -24,6 +24,15 @@ const ProductModal = ({product}) => {
     useEffect(() => {
         dispatch(getCategories())
     }, [dispatch])
+
+    useEffect(()=>{
+        setPrice(product.price || "")
+        setSalePrice(product.sale_price || "")
+        setSale(product.sale || "")
+        setDescription(product.description || "")
+        setCategory(product.category || "")
+        setBestSeller(product.best_seller)
+    }, [product])
 
     const customStyles = {
         content: {
@@ -36,12 +45,6 @@ const ProductModal = ({product}) => {
             minWidth: "650px"
         },
     };
-
-    const addToBestsellerHandler = (id, status)=>{
-        dispatch(addRemoveFromBestSeller({id, status: true}))
-        dispatch(getProducts())
-        setShowModal(false);
-    }
 
     function closeModal() {
         setShowModal(false);
@@ -56,23 +59,27 @@ const ProductModal = ({product}) => {
             case event.target.name = 'product_price':
                 setPrice(event.target.value)
                 break
-            case event.target.name = 'product_sale_price':
-                setSalePrice(event.target.value)
-                break
             case event.target.name = 'sale':
                 setSale(event.target.value)
+                setSalePrice(sale !== "" && sale > 0 ? Math.floor(price - price * event.target.value / 100).toFixed(2) : "")
                 break
             case event.target.name = 'description':
                 setDescription(event.target.value)
+                break
+            case event.target.name = 'best_seller':
+                setBestSeller(true)
                 break
             default:
                 break
         }
     }
 
+    console.log(sale);
+
     const handleSubmit = (event)=>{
         event.preventDefault()
-        dispatch(editProduct({...product, price, sale_price: salePrice, category: category, sale, description}))
+        dispatch(editProduct({...product, price, sale_price: salePrice, category: category, sale, description, best_seller: bestSeller}))
+        dispatch(getProducts())
         cancelEdit()
     }
     const cancelEdit = ()=>{
@@ -81,6 +88,7 @@ const ProductModal = ({product}) => {
         setSale(product.sale)
         setDescription(product.description)
         setCategory(product.category)
+        setBestSeller(false)
         closeModal()
     }
 
@@ -127,7 +135,8 @@ const ProductModal = ({product}) => {
                                         type="text"
                                         name={'product_sale_price'}
                                         value={salePrice ? salePrice : ""}
-                                        onChange={handleChange}
+                                        /*onChange={handleChange}*/
+                                        disabled={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -152,7 +161,6 @@ const ProductModal = ({product}) => {
                                         rows={5}
                                         name={'description'}
                                         value={description ? description : ""}
-                                        required={true}
                                         onChange={handleChange}
                                     />
                                 </Form.Group>
@@ -164,9 +172,10 @@ const ProductModal = ({product}) => {
                                     <Form.Check
                                         type={'checkbox'}
                                         id={`edit-best_seller`}
-                                        onChange={()=>addToBestsellerHandler(product._id, product.best_seller)}
-                                        checked={product && product.best_seller}
-                                        disabled={product && product.best_seller}
+                                        name={'best_seller'}
+                                        onChange={handleChange}
+                                        checked={bestSeller}
+                                        disabled={bestSeller}
                                         label={`Best Seller`}
                                     />
                                 </Form.Group>
@@ -178,7 +187,7 @@ const ProductModal = ({product}) => {
                                     onChange={handleChange}
                                     name={'category'}
                                     style={{ textTransform: 'capitalize' }}
-                                    value={product.category}
+                                    value={category ? category : 'all'}
                                 >
                                     {categories.map((category) => {
                                         return (

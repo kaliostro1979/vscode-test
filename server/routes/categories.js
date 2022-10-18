@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Categories = require("../models/categories")
 
-router.get('/', function(req, res){
+router.get('/categories', function(req, res){
     Categories.find({}, function(err, categories){
         if(err){
             console.log(err);

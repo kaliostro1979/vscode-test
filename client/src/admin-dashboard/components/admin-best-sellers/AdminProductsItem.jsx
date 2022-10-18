@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import {Button, Col, Row} from "react-bootstrap";
 import {Context} from "../../../context/Context";
+import {currencyFormatter} from "../../../utils/helpers";
 
 const AdminProductsItem = ({product, button_text, edit, callBack}) => {
     const {setShowModal, setActiveProduct} = useContext(Context);
@@ -30,13 +31,13 @@ const AdminProductsItem = ({product, button_text, edit, callBack}) => {
         ) : null}
         {product.price ? (
           <Col>
-            <p className={'Text'}>{product.price}</p>
+            <p className={product.sale_price ? 'Text HasSale' : 'Text'}>{currencyFormatter.format(product.price)}</p>
           </Col>
         ) : null}
 
           <Col>
               {product.sale_price ? (
-                  <p className={'Text'}>{product.sale_price}</p>
+                  <p className={'Text SalePrice'}>{currencyFormatter.format(product.sale_price)}</p>
               ) : <p className={'Text'}>-</p>}
           </Col>
           <Col>
@@ -52,6 +53,11 @@ const AdminProductsItem = ({product, button_text, edit, callBack}) => {
           <Col>
               {product.sale ? (
                   <p className={'Text'}>{product.sale}%</p>
+              ) : <p className={'Text'}>-</p>}
+          </Col>
+          <Col>
+              {product.best_seller ? (
+                  <p className={'Text BestSeller'}>Best seller</p>
               ) : <p className={'Text'}>-</p>}
           </Col>
 

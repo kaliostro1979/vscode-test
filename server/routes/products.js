@@ -27,7 +27,8 @@ router.get('/products', function (req, res) {
 
 router.get('/product-remove-bestseller', async function(req, res){
   const product = await Products.findOneAndUpdate({ _id: req.query.id }, {best_seller: req.query.status})
-  res.json(product)
+  const products = await Products.find({best_seller: true})
+  res.json(products)
 })
 
 router.get('/product-change-category', async function(req, res){

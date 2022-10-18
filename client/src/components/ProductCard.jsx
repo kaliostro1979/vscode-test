@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Col, Button } from 'react-bootstrap'
+import {Col, Button, Row} from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemCounter from './item-counter/ItemCounter'
@@ -33,7 +33,7 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
           />
         </div>
         <div className="ProductCradMeta">
-          <div className="ProductMetaInfo d-flex align-items-baseline pt-3 pb-4">
+          <div className="ProductMetaInfo pt-3 pb-4">
             <Link
             className='ProductMetaInfoLink'
               to={{
@@ -41,13 +41,24 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
                 search: `?product=${product._id}`,
               }}
             >
-              <div className="ProductCardTitle me-4">
+              <div className="ProductCardTitle me-4" title={title}>
                 <p className="fw-bold mb-0 fs-3">{title}</p>
               </div>
             </Link>
-            <div className="ProductCardPrice">
-              <p className="fw-bold mb-0">${price}</p>
-            </div>
+            <Row className={"align-items-center"}>
+              <Col className={"col-2"}>
+                <div className={sale_price ? "ProductCardPrice HasSale me-3" : "ProductCardPrice me-3"}>
+                  <p className="fw-bold mb-0">${price}</p>
+                </div>
+              </Col>
+              <Col className={"col-2"}>
+                {
+                  sale_price ? <div className="ProductCardSalePrice">
+                    <p className="fw-bold mb-0">${sale_price}</p>
+                  </div> : null
+                }
+              </Col>
+            </Row>
           </div>
           <div className="ProductCardButton">
             <Button

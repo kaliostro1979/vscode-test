@@ -16,6 +16,24 @@
 
   .Text {
     font-size: 24px;
+
+    &.BestSeller {
+      color: #CC0000;
+      width: fit-content;
+      padding: 3px 4px;
+      border: 1px solid #cc0000;
+    }
+
+    &.HasSale {
+      text-decoration: line-through;
+      color: #888888;
+      font-size: 22px;
+    }
+
+    &.SalePrice {
+      color: #CC0000;
+      font-weight: bold;
+    }
   }
 }
 

@@ -17,6 +17,7 @@ const AddNewCategory = () => {
     const handleFormSubmit = (e)=>{
         e.preventDefault()
         dispatch(addCategory(categoryName.toLowerCase()))
+        setCategoryName('')
     }
 
     return (
