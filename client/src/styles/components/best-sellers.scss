@@ -1,3 +1,14 @@
+.BestSellers {
+
+    .NoProducts {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 500px;
+    }
+}
+
 .BestSellersCard {
     border: 1px solid #F6F7F8;
     border-radius: 4px;
@@ -6,6 +17,7 @@
 .BestSellersCardImage {
     position: relative;
     padding-top: 272px;
+    overflow: hidden;
 
     img {
         position: absolute;
@@ -15,11 +27,21 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
+        transition: all .3s ease;
+    }
+
+    .ImageTwo {
+        left: 100%;
     }
 
     &:hover .ShoppingPlaceholder {
         display: flex;
     }
+
+    &:hover .ImageTwo {
+        left: 0;
+    }
+
 }
 
 .BestSellersCardMeta {

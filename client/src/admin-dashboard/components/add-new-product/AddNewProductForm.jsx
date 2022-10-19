@@ -1,22 +1,36 @@
-import { useRef, useEffect } from 'react'
+import {useRef, useEffect, useContext} from 'react'
 import { useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { addNewProduct } from '../../../redux/slices/addNewProduct.slice'
 import { getCategories } from '../../../redux/slices/catyegory.slice'
 import { useSelector } from 'react-redux'
+import {Context} from "../../../context/Context";
 
 const AddNewProductForm = () => {
   const [image, setImage] = useState('')
   const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
-  const [salePrice, setSalePrice] = useState('')
-  const [sale, setSale] = useState('')
-  const [onStock, setOnStock] = useState('')
-  const [category, setCategory] = useState('')
-  const [hasSale, setHasSale] = useState(false)
-  const [bestSeller, setBestSeller] = useState(false)
+  const salePriceRef = useRef()
+  const saleRef = useRef()
+
+  const {
+    price,
+    setPrice,
+    salePrice,
+    setSalePrice,
+    sale,
+    setSale,
+    description,
+    setDescription,
+    category,
+    setCategory,
+    bestSeller,
+    setBestSeller,
+    onStock,
+    setOnStock,
+    hasSale,
+    setHasSale
+  } = useContext(Context)
 
   const imageRef = useRef()
 
@@ -31,7 +45,7 @@ const AddNewProductForm = () => {
   const handleChange = (event) => {
     switch (event.target.name) {
       case 'image':
-        setImage(event.target.files[0])
+        setImage(event.target.files)
         break
       case 'title':
         setTitle(event.target.value)
@@ -42,12 +56,10 @@ const AddNewProductForm = () => {
       case 'product_price':
         setPrice(event.target.value)
         break
-      /*case 'sale_price':
-        setSalePrice(sale ? Math.floor(price - price * event.target.value / 100).toFixed(2) : "")
-        break*/
       case 'sale':
         setSale(event.target.value)
-        setSalePrice(sale ? Math.floor(price - price * event.target.value / 100).toFixed(2) : "")
+        salePriceRef.current.value = saleRef.current.value > 0 || saleRef.current.value !== "" ? Math.floor(price - price * event.target.value / 100).toFixed(2) : ""
+        setSalePrice(salePriceRef.current.value)
         break
       case 'has_sale':
         setHasSale(event.target.checked)
@@ -67,7 +79,9 @@ const AddNewProductForm = () => {
   }
 
   const formData = new FormData()
-  formData.append('image', image)
+  for (let i = 0; i < image.length; i++){
+    formData.append('image', image[i])
+  }
   formData.append('title', title)
   formData.append('rate', '')
   formData.append('category', category)
@@ -107,6 +121,7 @@ const AddNewProductForm = () => {
                 onChange={handleChange}
                 name={'image'}
                 ref={imageRef}
+                multiple={true}
               />
             </Form.Group>
           </Col>
@@ -133,7 +148,6 @@ const AddNewProductForm = () => {
                 name={'description'}
                 onChange={handleChange}
                 value={description}
-                required={true}
               />
             </Form.Group>
           </Col>
@@ -172,6 +186,7 @@ const AddNewProductForm = () => {
                 onChange={handleChange}
                 value={salePrice}
                 disabled={true}
+                ref={salePriceRef}
               />
             </Form.Group>
           </Col>
@@ -184,6 +199,7 @@ const AddNewProductForm = () => {
                 onChange={handleChange}
                 value={sale}
                 disabled={!hasSale}
+                ref={saleRef}
               />
             </Form.Group>
           </Col>

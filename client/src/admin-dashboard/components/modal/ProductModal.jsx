@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import {Context} from "../../../context/Context";
 import Modal from 'react-modal';
 import {Button, Col, Form, Row} from "react-bootstrap";
@@ -9,14 +9,24 @@ import CloseIcon from "../../../icons/CloseIcon";
 
 const ProductModal = ({product}) => {
 
-    const [price, setPrice] = useState("")
-    const [salePrice, setSalePrice] = useState("")
-    const [sale, setSale] = useState(product.sale)
-    const [description, setDescription] = useState("")
-    const [category, setCategory] = useState("")
-    const [bestSeller, setBestSeller] = useState(false)
+    const {
+        price,
+        setPrice,
+        salePrice,
+        setSalePrice,
+        sale,
+        setSale,
+        description,
+        setDescription,
+        category,
+        setCategory,
+        bestSeller,
+        setBestSeller
+    } = useContext(Context)
 
-    const formRef= useRef()
+    const formRef = useRef()
+    const salePriceRef = useRef()
+    const saleRef = useRef()
     const {showModal, setShowModal} = useContext(Context);
     const dispatch = useDispatch()
     const categories = useSelector((state) => state.main.categories.categories)
@@ -25,14 +35,14 @@ const ProductModal = ({product}) => {
         dispatch(getCategories())
     }, [dispatch])
 
-    useEffect(()=>{
+    useEffect(() => {
         setPrice(product.price || "")
         setSalePrice(product.sale_price || "")
         setSale(product.sale || "")
         setDescription(product.description || "")
         setCategory(product.category || "")
         setBestSeller(product.best_seller)
-    }, [product])
+    }, [product, setBestSeller, setCategory, setDescription, setPrice, setSale, setSalePrice])
 
     const customStyles = {
         content: {
@@ -50,9 +60,9 @@ const ProductModal = ({product}) => {
         setShowModal(false);
     }
 
-    const handleChange = (event)=>{
+    const handleChange = (event) => {
 
-        switch (event.target.name){
+        switch (event.target.name) {
             case event.target.name = 'category':
                 setCategory(event.target.value)
                 break
@@ -61,7 +71,8 @@ const ProductModal = ({product}) => {
                 break
             case event.target.name = 'sale':
                 setSale(event.target.value)
-                setSalePrice(sale !== "" && sale > 0 ? Math.floor(price - price * event.target.value / 100).toFixed(2) : "")
+                salePriceRef.current.value = saleRef.current.value > 0 || saleRef.current.value !== "" ? Math.floor(price - price * event.target.value / 100).toFixed(2) : ""
+                setSalePrice(salePriceRef.current.value)
                 break
             case event.target.name = 'description':
                 setDescription(event.target.value)
@@ -73,19 +84,25 @@ const ProductModal = ({product}) => {
                 break
         }
     }
-
-    console.log(sale);
-
-    const handleSubmit = (event)=>{
+    console.log(product)
+    const handleSubmit = (event) => {
         event.preventDefault()
-        dispatch(editProduct({...product, price, sale_price: salePrice, category: category, sale, description, best_seller: bestSeller}))
+        dispatch(editProduct({
+            ...product,
+            price,
+            sale_price: salePriceRef.current.value,
+            category: category,
+            sale,
+            description,
+            best_seller: bestSeller
+        }))
         dispatch(getProducts())
         cancelEdit()
     }
-    const cancelEdit = ()=>{
+    const cancelEdit = () => {
         setPrice(product.price)
         setSalePrice(product.sale_price)
-        setSale(product.sale)
+        setSale(product.sale || "")
         setDescription(product.description)
         setCategory(product.category)
         setBestSeller(false)
@@ -112,7 +129,8 @@ const ProductModal = ({product}) => {
                 <Row>
                     <Col className={"col-3"}>
                         <div className={"ModalProductImage"}>
-                            <img src={`${process.env.REACT_APP_IMAGE_PATH}` + product.image} alt={product.title}/>
+                            <img src={`${process.env.REACT_APP_IMAGE_PATH}` + product.image[0].filename}
+                                 alt={product.title}/>
                         </div>
                     </Col>
                     <Col className={"col-9"}>
@@ -134,9 +152,9 @@ const ProductModal = ({product}) => {
                                     <Form.Control
                                         type="text"
                                         name={'product_sale_price'}
-                                        value={salePrice ? salePrice : ""}
-                                        /*onChange={handleChange}*/
                                         disabled={true}
+                                        value={salePrice || ""}
+                                        ref={salePriceRef}
                                     />
                                 </Form.Group>
                             </Col>
@@ -146,8 +164,9 @@ const ProductModal = ({product}) => {
                                     <Form.Control
                                         type="text"
                                         name={'sale'}
-                                        value={sale ? sale : ""}
+                                        value={sale}
                                         onChange={handleChange}
+                                        ref={saleRef}
                                     />
                                 </Form.Group>
                             </Col>
@@ -186,7 +205,7 @@ const ProductModal = ({product}) => {
                                     aria-label="Category select"
                                     onChange={handleChange}
                                     name={'category'}
-                                    style={{ textTransform: 'capitalize' }}
+                                    style={{textTransform: 'capitalize'}}
                                     value={category ? category : 'all'}
                                 >
                                     {categories.map((category) => {

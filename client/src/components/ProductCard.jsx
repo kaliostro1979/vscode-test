@@ -22,14 +22,16 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
   return (
     <Col key={_id}>
       <div className="ProiductCard mb-5">
-        <div className="ProductCradImage">
+        <div className={'ProductCradImage'}>
           <img
-            src={
-              !image.includes('https')
-                ? `${process.env.REACT_APP_IMAGE_PATH}` + image
-                : image
-            }
-            alt={title}
+              src={`${process.env.REACT_APP_IMAGE_PATH}` + image[0].filename}
+              alt={product.title}
+              className={"ImageOne"}
+          />
+          <img
+              src={`${process.env.REACT_APP_IMAGE_PATH}` + image[1].filename}
+              alt={product.title}
+              className={"ImageTwo"}
           />
         </div>
         <div className="ProductCradMeta">

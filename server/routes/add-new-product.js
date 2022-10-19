@@ -7,18 +7,20 @@ const multer = require('multer')
 //const product = new Product()
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../server/public/uploads')
+      cb(null, '../server/public/uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '' + file.originalname)
+    cb(null, file.fieldname + Date.now() + file.originalname)
   },
 })
 
 const upload = multer({ storage: storage })
 
 
-router.post('/admin/add-new-product', upload.single('image'), async (req, res)=>{
+router.post('/admin/add-new-product', upload.array('image'), async (req, res)=>{
     const image = (req.file) ? req.file.filename : null
+    const files = req.files
+
     const {
       title,
       rate,
@@ -33,7 +35,7 @@ router.post('/admin/add-new-product', upload.single('image'), async (req, res)=>
     const product = new Product({
       title,
       rate,
-      image,
+      image: files,
       category,
       on_stock,
       description,

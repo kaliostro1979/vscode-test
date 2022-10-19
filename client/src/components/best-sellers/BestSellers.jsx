@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-import { Context } from './../../context/Context';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { getBestSellersProductsByCategory } from './../../redux/slices/best_sellers.slice';
-import { Row } from 'react-bootstrap';
+
+import {Col, Row} from 'react-bootstrap';
 import BestSellersCard from './BestSellersCard';
-import Preloader from './../Preloader';
+import {getBestSellersProductsByCategory} from "../../redux/slices/best_sellers.slice";
+import {Context} from "../../context/Context";
 
 const BestSellers = () => {
     const { activeCategory } = useContext(Context)
@@ -14,14 +15,16 @@ const BestSellers = () => {
     useEffect(() => {
       dispatch(getBestSellersProductsByCategory(activeCategory))
     }, [dispatch, activeCategory])
-    
+
     return (
       <>
         <Row className="BestSellers" lg={4}>
-          {activeCategoriesProducts ?
+          {activeCategoriesProducts.length ?
             activeCategoriesProducts.map((product) => {
               return <BestSellersCard product={product} key={product._id}/>
-            }) : <Preloader/>}
+            }) : <Col className={"NoProducts"}>
+                  <p>There are no any product in this category</p>
+              </Col>}
         </Row>
       </>
     )

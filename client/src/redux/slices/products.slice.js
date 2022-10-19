@@ -30,7 +30,6 @@ export const getSingleProduct = createAsyncThunk('cart/getSingleProduct', async 
 
 export const removeProduct = createAsyncThunk('cart/removeProduct', async (id, {rejectWithValue})=>{
   const products = await fetch(`${URL}/admin/remove-item?id=${id.id}`).then(res=>res.json()).then(data=>data)
-  console.log(products)
   return products
 })
 
@@ -45,10 +44,19 @@ const productsSlice = createSlice({
   initialState: {
     products: [],
     product: {},
+    activeImage: null,
+    activeIndex: 0,
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setActiveImage: (state, action)=>{
+      state.activeImage = action.payload
+    },
+    setActiveIndex: (state, action)=>{
+      state.activeIndex = action.payload
+    }
+  },
   extraReducers: {
     [getProducts.pending]: (state, action) => {
       state.isLoading = true
@@ -82,3 +90,4 @@ const productsSlice = createSlice({
 })
 
 export default productsSlice.reducer
+export const {setActiveImage, setActiveIndex} = productsSlice.actions

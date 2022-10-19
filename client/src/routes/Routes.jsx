@@ -2,7 +2,6 @@ import React from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom'
 import Home from './../pages/Home';
 import Store from './../pages/Store';
-import Product from './../pages/Product';
 import About from './../pages/About';
 import Cart from './../pages/Cart';
 import PageNotFound from './../pages/PageNotFound';
@@ -13,6 +12,7 @@ import AdminBestSellers from "../admin-dashboard/components/admin-best-sellers/A
 import AdminProducts from "../admin-dashboard/components/AdminProducts";
 import AddNewProductForm from './../admin-dashboard/components/add-new-product/AddNewProductForm';
 import AddNewCategory from './../admin-dashboard/components/add-new-category/AddNewCategory';
+import Product from "../pages/product/Product";
 
 
 

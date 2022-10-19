@@ -9,7 +9,6 @@ const AdminProducts = () => {
     const products = useSelector(state => state.main.shoppingCart.products)
 
     const handleRemoveItem = (id)=>{
-        //window.confirm('Are you sure want to remove this product?')
         dispatch(removeProduct(id))
     }
 

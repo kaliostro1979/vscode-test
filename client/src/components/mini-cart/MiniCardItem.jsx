@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux'
 import { removeProductFromCart } from '../../redux/slices/cartActions.slice'
 import { getMiniCartProducts } from '../../redux/slices/miniCart.slice'
 
-const MiniCardItem = ({ id, name, image, price, qnty }) => {
+const MiniCardItem = ({ _id, name, image, price, qnty }) => {
   const dispatch = useDispatch()
- 
+
 
   const handleRemoveItem = (id) => {
     dispatch(removeProductFromCart(id))
@@ -17,11 +17,7 @@ const MiniCardItem = ({ id, name, image, price, qnty }) => {
   return (
     <div className="MiniCardItem">
       <div className="MiniCardItemImage">
-        <img src={
-              !image.includes('https')
-                ? `${process.env.REACT_APP_IMAGE_PATH}` + image
-                : image
-            } alt={name} />
+        <img src={`${process.env.REACT_APP_IMAGE_PATH}` + image[0].filename} alt={name} />
       </div>
       <div className="MiniCardMeta">
         <p>{name}</p>
@@ -31,7 +27,7 @@ const MiniCardItem = ({ id, name, image, price, qnty }) => {
       <Button
         variant="danger"
         className="MiniCardItemRemoveIcon p-1"
-        onClick={() => handleRemoveItem(id)}
+        onClick={() => handleRemoveItem(_id)}
       >
         <RemoveIcon />
       </Button>

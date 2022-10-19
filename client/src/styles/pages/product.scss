@@ -1,0 +1,39 @@
+.ProductMainImage {
+  position: relative;
+  padding-top: 550px;
+  overflow: hidden;
+  background-color: #ededed;
+  margin-bottom: 20px;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.ProductImagesThumbsItem{
+  position: relative;
+  width: 150px;
+  padding-top: 150px;
+  background-color: #ededed;
+  margin-right: 15px;
+
+  &.Active {
+    border: 3px solid #cc0000;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

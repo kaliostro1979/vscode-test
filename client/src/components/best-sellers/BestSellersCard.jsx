@@ -2,7 +2,6 @@ import React from 'react'
 import { Col } from 'react-bootstrap'
 import { currencyFormatter } from '../../utils/helpers'
 import StarIcon from './../../icons/StarIcon';
-import ShoppingPlaceholder from './../shopping-placeholder/ShoppingPlaceholder';
 import { Link } from 'react-router-dom';
 
 const BestSellersCard = ({ product }) => {
@@ -12,16 +11,19 @@ const BestSellersCard = ({ product }) => {
   return (
     <Col className="mb-4">
       <div className="BestSellersCard">
-        <div className="BestSellersCardImage">
+        <div className={'BestSellersCardImage'}>
           <img
-            src={
-              product.image && !product.image.includes('https')
-                ? `${process.env.REACT_APP_IMAGE_PATH}` + product.image
-                : product.image
-            }
-            alt={product.title}
+              src={`${process.env.REACT_APP_IMAGE_PATH}` + product.image[0].filename}
+              alt={product.title}
+              className={"ImageOne"}
+              key={product.image[0].filename}
           />
-          <ShoppingPlaceholder />
+          <img
+              src={`${process.env.REACT_APP_IMAGE_PATH}` + product.image[1].filename}
+              alt={product.title}
+              className={"ImageTwo"}
+              key={product.image[1].filename}
+          />
         </div>
         <div className="BestSellersCardMeta">
           <Link
