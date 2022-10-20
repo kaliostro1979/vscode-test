@@ -1,11 +1,10 @@
-import {useRef, useEffect, useContext} from 'react'
+import {useRef, useEffect} from 'react'
 import { useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { addNewProduct } from '../../../redux/slices/addNewProduct.slice'
 import { getCategories } from '../../../redux/slices/catyegory.slice'
 import { useSelector } from 'react-redux'
-import {Context} from "../../../context/Context";
 
 const AddNewProductForm = () => {
   const [image, setImage] = useState('')
@@ -13,24 +12,14 @@ const AddNewProductForm = () => {
   const salePriceRef = useRef()
   const saleRef = useRef()
 
-  const {
-    price,
-    setPrice,
-    salePrice,
-    setSalePrice,
-    sale,
-    setSale,
-    description,
-    setDescription,
-    category,
-    setCategory,
-    bestSeller,
-    setBestSeller,
-    onStock,
-    setOnStock,
-    hasSale,
-    setHasSale
-  } = useContext(Context)
+  const [price, setPrice] = useState("")
+  const [salePrice, setSalePrice] = useState("")
+  const [sale, setSale] = useState("")
+  const [description, setDescription] = useState("")
+  const [category, setCategory] = useState("")
+  const [bestSeller, setBestSeller] = useState(false)
+  const [onStock, setOnStock] = useState('')
+  const [hasSale, setHasSale] = useState(false)
 
   const imageRef = useRef()
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Context} from "../../../context/Context";
 import Modal from 'react-modal';
 import {Button, Col, Form, Row} from "react-bootstrap";
@@ -8,21 +8,12 @@ import {getCategories} from "../../../redux/slices/catyegory.slice";
 import CloseIcon from "../../../icons/CloseIcon";
 
 const ProductModal = ({product}) => {
-
-    const {
-        price,
-        setPrice,
-        salePrice,
-        setSalePrice,
-        sale,
-        setSale,
-        description,
-        setDescription,
-        category,
-        setCategory,
-        bestSeller,
-        setBestSeller
-    } = useContext(Context)
+    const [price, setPrice] = useState("")
+    const [salePrice, setSalePrice] = useState("")
+    const [sale, setSale] = useState("")
+    const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
+    const [bestSeller, setBestSeller] = useState(false)
 
     const formRef = useRef()
     const salePriceRef = useRef()
@@ -84,7 +75,7 @@ const ProductModal = ({product}) => {
                 break
         }
     }
-    console.log(product)
+
     const handleSubmit = (event) => {
         event.preventDefault()
         dispatch(editProduct({

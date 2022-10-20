@@ -15,16 +15,6 @@ export const ContextProvider = (({children}) => {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(state => state.main.auth.isLoggedIn)
 
-    const [price, setPrice] = useState("")
-    const [salePrice, setSalePrice] = useState("")
-    const [sale, setSale] = useState("")
-    const [description, setDescription] = useState("")
-    const [category, setCategory] = useState("")
-    const [bestSeller, setBestSeller] = useState(false)
-    const [onStock, setOnStock] = useState('')
-    const [hasSale, setHasSale] = useState(false)
-
-
     useEffect(() => {
         dispatch(checkIsLoggedIn())
     }, [dispatch])
@@ -44,23 +34,7 @@ export const ContextProvider = (({children}) => {
                 setActiveProduct,
                 activeProduct,
                 activeImage,
-                setActiveImage,
-                price,
-                setPrice,
-                salePrice,
-                setSalePrice,
-                sale,
-                setSale,
-                description,
-                setDescription,
-                category,
-                setCategory,
-                bestSeller,
-                setBestSeller,
-                onStock,
-                setOnStock,
-                hasSale,
-                setHasSale
+                setActiveImage
             }}
         >
             {children}
