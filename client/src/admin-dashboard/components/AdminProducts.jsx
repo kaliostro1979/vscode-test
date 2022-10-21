@@ -13,7 +13,7 @@ const AdminProducts = () => {
     }
 
     useEffect(() => {
-        dispatch(getProducts())
+        dispatch(getProducts("all"))
     }, [dispatch])
 
     return (

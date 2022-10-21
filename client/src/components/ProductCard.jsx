@@ -23,16 +23,20 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
     <Col key={_id}>
       <div className="ProiductCard mb-5">
         <div className={'ProductCradImage'}>
-          <img
-              src={`${process.env.REACT_APP_IMAGE_PATH}` + image[0].filename}
-              alt={product.title}
-              className={"ImageOne"}
-          />
-          <img
-              src={`${process.env.REACT_APP_IMAGE_PATH}` + image[1].filename}
-              alt={product.title}
-              className={"ImageTwo"}
-          />
+          {
+            image[0] ? <img
+                src={`${process.env.REACT_APP_IMAGE_PATH}` + image[0].filename}
+                alt={product.title}
+                className={"ImageOne"}
+            /> : null
+          }
+          {
+            image[1] ?  <img
+                src={`${process.env.REACT_APP_IMAGE_PATH}` + image[1].filename}
+                alt={product.title}
+                className={"ImageTwo"}
+            /> : null
+          }
         </div>
         <div className="ProductCradMeta">
           <div className="ProductMetaInfo pt-3 pb-4">

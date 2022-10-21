@@ -18,6 +18,7 @@ const addCategory = require('./routes/categories')
 const removeFromBestseller = require('./routes/products')
 const changeProductCategory = require('./routes/products')
 const editProduct = require('./routes/edit-product')
+const removeCategory = require('./routes/remove-category')
 
 require('dotenv').config()
 
@@ -39,6 +40,7 @@ app.use('/', addCategory)
 app.use('/', removeFromBestseller)
 app.use('/', changeProductCategory)
 app.use('/', editProduct)
+app.use('/', removeCategory)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,

@@ -4,9 +4,9 @@ const URL = process.env.REACT_APP_PRYMARY_URL
 
 export const getProducts = createAsyncThunk(
   'cart/getProducts',
-  async (_, { rejectWithValue }) => {
+  async (category, { rejectWithValue }) => {
     try {
-      const products = await fetch(`${URL}/products`)
+      const products = await fetch(`${URL}/products?category=${category}`)
         .then((res) => res.json())
         .then((data) => data)
       return products

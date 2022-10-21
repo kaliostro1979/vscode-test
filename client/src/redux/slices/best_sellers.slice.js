@@ -4,6 +4,7 @@ import { URL } from '../../utils/helpers'
 export const getBestSellersProductsByCategory = createAsyncThunk(
   'best_sellers/getBestSellersProductsByCategory',
   async (category='all', { rejectWithValue }) => {
+
     try {
       const products = await fetch(`${URL}/best-sellers?category=${category}`)
         .then((res) => res.json())

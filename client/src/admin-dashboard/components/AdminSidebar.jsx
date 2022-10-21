@@ -10,7 +10,7 @@ const AdminSidebar = () => {
                 <ListGroup.Item><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"products"}>Products</NavLink></ListGroup.Item>
                 <ListGroup.Item><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"best-sellers"}>Best sellers</NavLink></ListGroup.Item>
                 <ListGroup.Item><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"add-new-product"}>Add new product</NavLink></ListGroup.Item>
-                <ListGroup.Item><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"add-new-category"}>Add new Category</NavLink></ListGroup.Item>
+                <ListGroup.Item><NavLink className={({ isActive }) => (isActive ? 'Active' : null)} to={"add-new-category"}>Category</NavLink></ListGroup.Item>
             </ListGroup>
         </div>
     );

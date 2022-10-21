@@ -4,17 +4,27 @@ const router = express.Router()
 const Products = require('../models/products')
 
 router.get('/products', function (req, res) {
-  if (!req.query.id) {
-    Products.find({}, function (err, products) {
-      if (err) {
-        console.log(err)
-      } else {
-        res.json(products)
-      }
-    })
+  if (!req.query.id && req.query.category) {
+    if (req.query.category === 'all'){
+      Products.find({}, function (err, products) {
+        if (err) {
+          console.log(err)
+        } else {
+          res.json(products)
+        }
+      })
+    }else {
+      Products.find({category: req.query.category }, function (err, products) {
+        if (err) {
+          console.log(err)
+        } else {
+          res.json(products)
+        }
+      })
+    }
   }
 
-  if (Object.keys(req.query).includes('id')) {
+  if (req.query.id) {
     Products.findOne({ _id: req.query.id }, function (err, product) {
       if (err) {
         console.log(err)

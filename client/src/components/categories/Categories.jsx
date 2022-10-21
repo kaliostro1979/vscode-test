@@ -48,7 +48,7 @@ const Categories = () => {
                   }
                   onClick={() => handleClick(category.name)}
                 >
-                  {category.name}
+                  {category.name.split("-").join(" ")}
                 </li>
               )
             })}
