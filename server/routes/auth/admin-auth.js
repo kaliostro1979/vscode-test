@@ -3,13 +3,13 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
-const User = require('../../models/admin')
+const Admin = require('../../models/admin')
 
 
 //Login
 router.post('/admin/login', async function (req, res) {
     const {email, password} = req.body
-    const user = await User.findOne({email})
+    const user = await Admin.findOne({email})
 
     if (user && await bcrypt.compare(password, user.password)){
         const token = jwt.sign({
@@ -29,7 +29,7 @@ router.post('/admin/registration', async function (req, res) {
         name, email, password: hashedPassword
     }
     try {
-        const user = await User.create(userData)
+        const user = await Admin.create(userData)
         res.send({user, status: 'ok'})
     }catch (e) {
         res.json({status: 'error', error: 'Duplicate email'})

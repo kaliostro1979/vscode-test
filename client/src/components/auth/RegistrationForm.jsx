@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { registrationAction } from "../../redux/slices/auth.slice";
 import { Button, Form } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { userRegistration } from "../../redux/slices/user.auth.slice";
 
 const RegistrationForm = () => {
     const dispatch = useDispatch()
@@ -13,7 +12,7 @@ const RegistrationForm = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        dispatch(registrationAction({email, name, password}))
+        dispatch(userRegistration({email, name, password}))
     }
 
     const handleNameValue = (e)=>{

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
-import { loginAction } from "../../redux/slices/auth.slice";
 import { Button, Form } from "react-bootstrap";
+import { userLogin } from "../../redux/slices/user.auth.slice";
 
 const LoginForm = () => {
     const dispatch = useDispatch()
@@ -21,7 +21,7 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(loginAction({email, password}))
+        dispatch(userLogin({email, password}))
     }
 
     const handleEmailValue = (e) => {

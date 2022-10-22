@@ -19,6 +19,7 @@ const removeFromBestseller = require('./routes/products')
 const changeProductCategory = require('./routes/products')
 const editProduct = require('./routes/edit-product')
 const removeCategory = require('./routes/remove-category')
+const userAuth = require('./routes/auth/user-auth')
 
 require('dotenv').config()
 
@@ -41,6 +42,7 @@ app.use('/', removeFromBestseller)
 app.use('/', changeProductCategory)
 app.use('/', editProduct)
 app.use('/', removeCategory)
+app.use('/', userAuth)
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION,
