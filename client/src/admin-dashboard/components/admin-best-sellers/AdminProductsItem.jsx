@@ -26,7 +26,7 @@ const AdminProductsItem = ({product, button_text, edit, callBack}) => {
                 </div>
             </Col>
             {product.title ? (
-                <Col>
+                <Col className={"col-2"}>
                     <p className={'Text'}>{product.title}</p>
                 </Col>
             ) : null}

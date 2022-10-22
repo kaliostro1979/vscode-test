@@ -45,6 +45,5 @@ export default cartAction.reducer
 export const {
   addToShoppingCart,
   removeProductFromCart,
-  removeAllProductsFromCart,
-  getProductsFromLocalStorage,
+  removeAllProductsFromCart
 } = cartAction.actions

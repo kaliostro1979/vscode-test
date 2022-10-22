@@ -51,16 +51,21 @@
 }
 
 .ProductCardPrice {
+    display: flex;
     font-size: 24px;
 
     &.HasSale {
-        text-decoration: line-through;
-        color: #888888;
-        font-size: 22px;
+        .Price {
+            text-decoration: line-through;
+            color: #888888;
+            font-size: 22px;
+        }
     }
 }
 
 .ProductCardSalePrice{
+    width: fit-content;
+    margin-left: 20px;
     font-size: 24px;
     color: #CC0000;
 }

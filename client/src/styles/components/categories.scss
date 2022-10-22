@@ -1,16 +1,21 @@
 .CategoriesList {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    max-width: 627px;
+    flex-wrap: wrap;
     margin: 0 auto;
     padding: 23px 0;
+    max-width: 750px;
 }
 
 .CategoriesListItem {
     font-size: 20px;
     text-transform: capitalize;
     cursor: pointer;
+
+    &:not(:last-child) {
+        margin-right: 15px;
+    }
 
     &.Active {
         font-weight: 700;

@@ -52,17 +52,15 @@ const ProductCard = ({ _id, title, price, sale_price, sale, image, qnty, product
               </div>
             </Link>
             <Row className={"align-items-center"}>
-              <Col className={"col-2"}>
+              <Col className={"col-4"}>
                 <div className={sale_price ? "ProductCardPrice HasSale me-3" : "ProductCardPrice me-3"}>
-                  <p className="fw-bold mb-0">${price}</p>
+                  <p className="fw-bold mb-0 Price">${price}</p>
+                  {
+                    sale_price ? <div className="ProductCardSalePrice">
+                      <p className="fw-bold mb-0">${sale_price}</p>
+                    </div> : null
+                  }
                 </div>
-              </Col>
-              <Col className={"col-2"}>
-                {
-                  sale_price ? <div className="ProductCardSalePrice">
-                    <p className="fw-bold mb-0">${sale_price}</p>
-                  </div> : null
-                }
               </Col>
             </Row>
           </div>

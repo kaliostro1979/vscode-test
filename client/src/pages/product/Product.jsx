@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import {Row, Col, Container, Button} from 'react-bootstrap';
+import {Row, Col, Container} from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import ImageThumbsItem from "./ImageThumbsItem";
 import {getSingleProduct} from "../../redux/slices/products.slice";
@@ -30,7 +30,7 @@ const Product = () => {
                                     <Slider data={product.image && product.image} Component={ImageThumbsItem}/>
                                 </div>
                             </Col>
-                            <Col className={"col-7 offset-1"}>
+                            <Col className={"col-4 offset-1"}>
                                 <ProductMeta product={product}/>
                             </Col>
                         </Row>

@@ -4,7 +4,7 @@ import PlusIcon from './../../icons/PlusIcon';
 import MinusIcon from './../../icons/MinusIcon';
 
 
-const ItemCounter = ({ setProductQuantity, productQuantity, product }) => {
+const ItemCounter = ({ setProductQuantity, productQuantity, product, className }) => {
 
     const handleIncrementCount = () => {
         setProductQuantity((prev) => prev + 1)
@@ -15,7 +15,7 @@ const ItemCounter = ({ setProductQuantity, productQuantity, product }) => {
     }
 
     return (
-        <div className="ItemCounter">
+        <div className={className ? "ItemCounter " + className : "ItemCounter"}>
             <Button
                 variant="outline-secondary"
                 className="ItemCounterButton"

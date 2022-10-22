@@ -5,11 +5,19 @@
     }
 }
 
+.NavBarIcons {
+    display: flex;
+}
+
 .NavBarBagIcon {
     position: relative;
     width: 35px;
     height: 35px;
     padding: 3px;
+}
+
+.NavBarLoginIcon {
+    margin-left: 20px;
 }
 
 .CardItemsCount {

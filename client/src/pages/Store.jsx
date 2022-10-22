@@ -26,7 +26,7 @@ const Store = () => {
                     <Categories/>
                 </Col>
             </Row>
-            <Row md={2} xs={1} lg={3}>
+            <Row md={2} xs={1} lg={4}>
                 {error ? <p>{error}</p> : null}
                 {isLoading ? (
                     <Preloader/>

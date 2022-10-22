@@ -37,3 +37,37 @@
     object-position: center;
   }
 }
+
+.ProductPageCounter {
+  margin: 20px 0;
+}
+
+.ProductMetaPriceWrapper {
+  display: flex;
+  align-items: baseline;
+}
+
+.ProductMetaPrice {
+  font-size: 36px;
+
+  &.HasSale {
+    font-size: 28px;
+    color: #888888;
+    text-decoration: line-through;
+  }
+}
+
+.ProductMetaSalePrice {
+  color: #cc0000;
+  font-size: 36px;
+  margin-left: 20px;
+}
+
+.ProductMetaSale {
+  font-size: 24px;
+  margin-left: 20px;
+}
+
+.ProductMetaButton {
+  width: 100%;
+}

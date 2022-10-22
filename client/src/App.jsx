@@ -5,6 +5,7 @@ import {Context} from './context/Context'
 import RoutesContainer from './routes/Routes'
 import CustomNavBar from './components/CustomNavBar';
 import MiniCard from './components/mini-cart/MiniCard';
+import AuthModal from "./components/auth/AuthModal";
 
 
 
@@ -29,6 +30,7 @@ function App() {
                     }
                     <RoutesContainer/>
                 </Layout>
+                <AuthModal/>
             </div>
         </>
     )

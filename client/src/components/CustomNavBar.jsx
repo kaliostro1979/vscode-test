@@ -14,6 +14,7 @@ const CustomNavBar = () => {
     const [itemsCount, setItemsCount] = useState(null)
 
     const { setShow } = useContext(Context)
+    const {setShowModal} = useContext(Context);
 
     useEffect(() => {
       setItemsCount(
@@ -39,16 +40,21 @@ const CustomNavBar = () => {
                 About
               </Nav.Link>
             </Nav>
-            <Button
-              className="NavBarBagIcon d-flex justify-content-center align-items-center"
-              variant="outline-primary"
-              onClick={() => setShow(true)}
-            >
-              <div className="NavBarBagIcon">
-                <div className="CardItemsCount">{itemsCount || 0}</div>
-                <ShoppingCartIcon />
+              <div className="NavBarIcons">
+                  <Button
+                      className="NavBarBagIcon d-flex justify-content-center align-items-center"
+                      variant="outline-primary"
+                      onClick={() => setShow(true)}
+                  >
+                      <div className="NavBarBagIcon">
+                          <div className="CardItemsCount">{itemsCount || 0}</div>
+                          <ShoppingCartIcon />
+                      </div>
+                  </Button>
+                  <Button className={"NavBarLoginIcon"} onClick={()=>setShowModal(true)}>
+                      Login
+                  </Button>
               </div>
-            </Button>
           </div>
         </Container>
       </Navbar>
