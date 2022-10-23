@@ -3,17 +3,19 @@ import { Button, Container, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
 import ShoppingCartIcon from './../icons/ShoppingCartIcon';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Context } from "../context/Context";
+import { userLogout } from "../redux/slices/user.auth.slice";
 
 const CustomNavBar = () => {
+    const dispatch = useDispatch()
     const cardItems = useSelector(
       (state) => state.main.miniCartProducts.addedPorducts
     )
 
     const [itemsCount, setItemsCount] = useState(null)
 
-    const { setShow } = useContext(Context)
+    const { setShow, user } = useContext(Context)
     const {setShowModal} = useContext(Context);
 
     useEffect(() => {
@@ -51,9 +53,14 @@ const CustomNavBar = () => {
                           <ShoppingCartIcon />
                       </div>
                   </Button>
-                  <Button className={"NavBarLoginIcon"} onClick={()=>setShowModal(true)}>
-                      Login
-                  </Button>
+                  {
+                      user ? <div>
+                          <p>{user.name}</p>
+                          <Button className={"NavBarLoginIcon"} onClick={()=>dispatch(userLogout())}>Logout</Button>
+                      </div> : <Button className={"NavBarLoginIcon"} onClick={()=>setShowModal(true)}>
+                          Login
+                      </Button>
+                  }
               </div>
           </div>
         </Container>

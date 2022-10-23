@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {URL} from '../../utils/helpers'
+
+
 export const userLogin = createAsyncThunk('user_auth/userLogin', async (data, { rejectWithValue }) => {
     const user = await fetch(`${URL}/auth/login`, {
         method: "POST",
@@ -33,13 +35,21 @@ export const userRegistration = createAsyncThunk('user_auth/userRegistration', a
     return user.user
 })
 
+export const userLogout = createAsyncThunk('user_auth/userLogout', async ()=>{
+    const data = await fetch(`${URL}/auth/logout`).then(res => res.json()).then(data => data)
+    if (!data.token){
+        sessionStorage.removeItem("user_token")
+    }
+})
+
 
 const userAuthSlice = createSlice({
     name: "user_auth",
     initialState: {
         user: null,
         isLoading: false,
-        error: null
+        error: null,
+        isLoggedIn: false
     },
     reducer: {},
     extraReducers: {
@@ -64,6 +74,18 @@ const userAuthSlice = createSlice({
             state.error = null
         },
         [userRegistration.rejected]: (state, action)=>{
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [userLogout.pending]: (state, action)=>{
+            state.isLoading = true
+        },
+        [userLogout.fulfilled]: (state, action)=>{
+            state.isLoading = false
+            state.user = null
+            state.error = null
+        },
+        [userLogout.rejected]: (state, action)=>{
             state.isLoading = false
             state.error = action.payload
         }

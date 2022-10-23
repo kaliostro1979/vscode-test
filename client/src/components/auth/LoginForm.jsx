@@ -10,7 +10,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
-    const {isLoggedIn} = useContext(Context)
+    const {isLoggedIn, setShowModal} = useContext(Context)
     const error = useSelector(state => state.main.auth.error)
 
     useEffect(() => {
@@ -22,6 +22,9 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(userLogin({email, password}))
+        setEmail("")
+        setPassword("")
+        setShowModal(false)
     }
 
     const handleEmailValue = (e) => {
@@ -43,6 +46,7 @@ const LoginForm = () => {
                             placeholder="Enter email"
                             name="email"
                             onChange={handleEmailValue}
+                            value={email}
                         />
                     </Form.Group>
 
@@ -53,6 +57,7 @@ const LoginForm = () => {
                             placeholder="Password"
                             name="password"
                             onChange={handlePasswordValue}
+                            value={password}
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit">

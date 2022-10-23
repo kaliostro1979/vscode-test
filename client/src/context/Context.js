@@ -1,6 +1,7 @@
-import {createContext, useEffect, useState} from 'react'
+import { createContext, useEffect, useState, useSyncExternalStore } from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {checkIsLoggedIn} from "../redux/slices/auth.slice";
+import jwtDecode from "jwt-decode";
 
 
 export const Context = createContext(null)
@@ -12,12 +13,22 @@ export const ContextProvider = (({children}) => {
     const [activeCategory, setActiveCategory] = useState("all")
     const [activeProduct, setActiveProduct] = useState(null)
     const [activeImage, setActiveImage] = useState( '')
+    const [user, setUser] = useState(null)
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(state => state.main.auth.isLoggedIn)
 
     useEffect(() => {
         dispatch(checkIsLoggedIn())
     }, [dispatch])
+
+    useEffect(()=>{
+        const token = sessionStorage.getItem("user_token")
+        if (token){
+            setUser(jwtDecode(token))
+        }else{
+            setUser(null)
+        }
+    },[])
 
     return (
         <Context.Provider
@@ -34,7 +45,9 @@ export const ContextProvider = (({children}) => {
                 setActiveProduct,
                 activeProduct,
                 activeImage,
-                setActiveImage
+                setActiveImage,
+                user,
+                setUser
             }}
         >
             {children}
