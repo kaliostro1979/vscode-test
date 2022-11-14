@@ -13,6 +13,9 @@ const RegistrationForm = () => {
     const handleSubmit = (e)=>{
         e.preventDefault()
         dispatch(userRegistration({email, name, password}))
+        setName("")
+        setEmail("")
+        setPassword("")
     }
 
     const handleNameValue = (e)=>{
@@ -33,15 +36,15 @@ const RegistrationForm = () => {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Full name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter full name" onChange={handleNameValue} />
+                        <Form.Control type="text" placeholder="Enter full name" onChange={handleNameValue} value={name}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" onChange={handleEmailValue}/>
+                        <Form.Control type="email" placeholder="Enter email" onChange={handleEmailValue} value={email}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange={handlePasswordValue}/>
+                        <Form.Control type="password" placeholder="Password" onChange={handlePasswordValue} value={password}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Register

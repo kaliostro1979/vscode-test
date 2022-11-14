@@ -1,22 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Container, Navbar } from 'react-bootstrap';
+import {Button, Container, ListGroup, Navbar} from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
 import ShoppingCartIcon from './../icons/ShoppingCartIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { Context } from "../context/Context";
-import { userLogout } from "../redux/slices/user.auth.slice";
+import {checkUserIsLoggedIn, userLogout} from "../redux/slices/user.auth.slice";
+import ChevronDownIcon from "../icons/ChevronDownIcon";
 
 const CustomNavBar = () => {
     const dispatch = useDispatch()
-    const cardItems = useSelector(
-      (state) => state.main.miniCartProducts.addedPorducts
-    )
+    const cardItems = useSelector((state) => state.main.miniCartProducts.addedPorducts)
+    const loggedInUser = useSelector(state => state.main.user.loggedInUser)
 
     const [itemsCount, setItemsCount] = useState(null)
 
-    const { setShow, user } = useContext(Context)
-    const {setShowModal} = useContext(Context);
+    const { setShow, showDropDown, setShowDropDown, setShowModal } = useContext(Context)
 
     useEffect(() => {
       setItemsCount(
@@ -26,6 +25,10 @@ const CustomNavBar = () => {
           }, 0)
       )
     }, [cardItems])
+
+    useEffect(()=>{
+        dispatch(checkUserIsLoggedIn())
+    }, [dispatch])
 
     return (
       <Navbar fixed={'top'} className={'bg-light'}>
@@ -54,8 +57,23 @@ const CustomNavBar = () => {
                       </div>
                   </Button>
                   {
-                      user ? <div>
-                          <p>{user.name}</p>
+                      loggedInUser ? <div className={"AuthBlock"}>
+                          <div className={"AuthBlockDropDown"}>
+                              <div className={"AuthBlockIcon"} onClick={()=>setShowDropDown((prev)=>!prev)}>
+                                  <ChevronDownIcon/>
+                              </div>
+                              <p className={"AuthBlockName"}>{loggedInUser.name}</p>
+                              <div className={showDropDown ? "AuthBlockDropDownInner Open" : "AuthBlockDropDownInner"}>
+                                  <ListGroup className={"AuthBlockDropDownList"}>
+                                      <ListGroup.Item>
+                                          <NavLink to={"/cart"}>Shopping cart</NavLink>
+                                      </ListGroup.Item>
+                                      <ListGroup.Item>
+                                          <NavLink to={`/user/${loggedInUser.iat}`}>Account page</NavLink>
+                                      </ListGroup.Item>
+                                  </ListGroup>
+                              </div>
+                          </div>
                           <Button className={"NavBarLoginIcon"} onClick={()=>dispatch(userLogout())}>Logout</Button>
                       </div> : <Button className={"NavBarLoginIcon"} onClick={()=>setShowModal(true)}>
                           Login

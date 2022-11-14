@@ -6,6 +6,7 @@ import RoutesContainer from './routes/Routes'
 import CustomNavBar from './components/CustomNavBar';
 import MiniCard from './components/mini-cart/MiniCard';
 import AuthModal from "./components/auth/AuthModal";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -17,6 +18,7 @@ function App() {
     useEffect(() => {
         setShow(false)
     }, [navigation, setShow])
+
 
     return (
         <>

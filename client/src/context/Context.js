@@ -1,7 +1,8 @@
-import { createContext, useEffect, useState, useSyncExternalStore } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {checkIsLoggedIn} from "../redux/slices/auth.slice";
-import jwtDecode from "jwt-decode";
+import {useLocation} from "react-router-dom";
+import {checkUserIsLoggedIn} from "../redux/slices/user.auth.slice";
 
 
 export const Context = createContext(null)
@@ -13,22 +14,23 @@ export const ContextProvider = (({children}) => {
     const [activeCategory, setActiveCategory] = useState("all")
     const [activeProduct, setActiveProduct] = useState(null)
     const [activeImage, setActiveImage] = useState( '')
-    const [user, setUser] = useState(null)
+    const [showDropDown, setShowDropDown] = useState(false)
+
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(state => state.main.auth.isLoggedIn)
+    const userIsLoggedIn = useSelector(state => state.main.user.isLoggedIn)
+    const loggedInUser = useSelector(state => state.main.user.loggedInUser)
+    const location = useLocation()
+
 
     useEffect(() => {
         dispatch(checkIsLoggedIn())
+        dispatch(checkUserIsLoggedIn())
     }, [dispatch])
 
     useEffect(()=>{
-        const token = sessionStorage.getItem("user_token")
-        if (token){
-            setUser(jwtDecode(token))
-        }else{
-            setUser(null)
-        }
-    },[])
+        setShowDropDown(false)
+    }, [location])
 
     return (
         <Context.Provider
@@ -46,8 +48,10 @@ export const ContextProvider = (({children}) => {
                 activeProduct,
                 activeImage,
                 setActiveImage,
-                user,
-                setUser
+                loggedInUser,
+                userIsLoggedIn,
+                showDropDown,
+                setShowDropDown
             }}
         >
             {children}

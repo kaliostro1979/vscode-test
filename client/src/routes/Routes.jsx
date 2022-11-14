@@ -13,6 +13,7 @@ import AdminProducts from "../admin-dashboard/components/AdminProducts";
 import AddNewProductForm from './../admin-dashboard/components/add-new-product/AddNewProductForm';
 import AddNewCategory from './../admin-dashboard/components/add-new-category/AddNewCategory';
 import Product from "../pages/product/Product";
+import UserAccountPage from "../pages/UserAccountPage";
 
 
 
@@ -24,18 +25,10 @@ const RoutesContainer = () => {
         <Route path={'/admin'}>
           <Route path={''} element={<AdminHome />}>
             <Route index element={<Navigate to={'products'} replace />} />
-            <Route exact path={'products'} element={<AdminProducts />} />
-            <Route exact path={'best-sellers'} element={<AdminBestSellers />} />
-            <Route
-              exact
-              path={'add-new-product'}
-              element={<AddNewProductForm />}
-            />
-            <Route
-              exact
-              path={'add-new-category'}
-              element={<AddNewCategory />}
-            />
+            <Route path={'products'} element={<AdminProducts />} />
+            <Route path={'best-sellers'} element={<AdminBestSellers />} />
+            <Route path={'add-new-product'} element={<AddNewProductForm />}/>
+            <Route path={'add-new-category'} element={<AddNewCategory />}/>
           </Route>
           <Route path={'login'} element={<Login />} />
           <Route path={'registration'} element={<Registration />} />
@@ -43,6 +36,9 @@ const RoutesContainer = () => {
         <Route path={'/store/:id'} element={<Product />} />
         <Route path={'/about'} element={<About />} />
         <Route path={'/cart'} element={<Cart />} />
+          <Route path={"/user"}>
+              <Route path={":userId"} element={<UserAccountPage/>}/>
+          </Route>
         <Route path={'*'} element={<PageNotFound />} />
       </Routes>
     )

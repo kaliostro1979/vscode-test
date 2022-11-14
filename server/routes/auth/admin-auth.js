@@ -8,6 +8,7 @@ const Admin = require('../../models/admin')
 
 //Login
 router.post('/admin/login', async function (req, res) {
+    console.log(req.body)
     const {email, password} = req.body
     const user = await Admin.findOne({email})
 

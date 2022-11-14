@@ -27,6 +27,10 @@
 .ProductCardButton {
     display: flex;
     align-items: center;
+
+    button {
+        z-index: 0!important;
+    }
 }
 
 .ProductCardTitle {

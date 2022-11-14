@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {URL} from '../../utils/helpers'
+import jwtDecode from "jwt-decode";
 
 
 export const userLogin = createAsyncThunk('user_auth/userLogin', async (data, { rejectWithValue }) => {
@@ -49,16 +50,25 @@ const userAuthSlice = createSlice({
         user: null,
         isLoading: false,
         error: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        loggedInUser: null
     },
-    reducer: {},
+    reducers: {
+        checkUserIsLoggedIn(state){
+            const token = sessionStorage.getItem("user_token")
+            if (token){
+                state.isLoggedIn = true
+                state.loggedInUser = jwtDecode(token)
+            }
+        }
+    },
     extraReducers: {
         [userLogin.pending]: (state, action)=>{
             state.isLoading = true
         },
         [userLogin.fulfilled]: (state, action)=>{
             state.isLoading = false
-            state.user = action.payload
+            state.loggedInUser = jwtDecode(action.payload.token)
             state.error = null
         },
         [userLogin.rejected]: (state, action)=>{
@@ -82,7 +92,7 @@ const userAuthSlice = createSlice({
         },
         [userLogout.fulfilled]: (state, action)=>{
             state.isLoading = false
-            state.user = null
+            state.loggedInUser = null
             state.error = null
         },
         [userLogout.rejected]: (state, action)=>{
@@ -93,3 +103,4 @@ const userAuthSlice = createSlice({
 })
 
 export default userAuthSlice.reducer
+export const {checkUserIsLoggedIn} = userAuthSlice.actions
